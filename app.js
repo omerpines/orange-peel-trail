@@ -2,7 +2,7 @@
 const CONFIG = {
   waNumber: "",        // מספר הוואטסאפ של היוזמה בפורמט בינלאומי, בלי + ובלי מקפים. לדוגמה: 972501234567
   channelUrl: "https://chat.whatsapp.com/FR8eUckPnGV6BjapSV4ThV",      // קישור הזמנה לקבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
-  sheetUrl: "",        // כתובת ה-Web App של Apps Script שמחובר לגיליון (https://script.google.com/macros/s/.../exec)
+  sheetUrl: "https://script.google.com/macros/s/AKfycbxwaY7G04iPI745bcpnnPUKUUCInKgm_dzhdE3QpqQie0IsWU5nSvpKUxkO-foUqJr1/exec",        // כתובת ה-Web App של Apps Script שמחובר לגיליון (https://script.google.com/macros/s/.../exec)
   formUrl: "",         // אופציונלי: קישור לטופס Google במקום וואטסאפ
   siteUrl: "https://omerpines.github.io/orange-peel-trail/"  // הקישור לאתר שמופיע בהודעה לקבוצת הבניין
 };
