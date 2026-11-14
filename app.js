@@ -1,7 +1,7 @@
 /* ===== הגדרות: לעדכן כאן ===== */
 const CONFIG = {
   waNumber: "",        // מספר הוואטסאפ של היוזמה בפורמט בינלאומי, בלי + ובלי מקפים. לדוגמה: 972501234567
-  channelUrl: "",      // קישור הזמנה לקהילת/קבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
+  channelUrl: "",      // קישור הזמנה לקבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
   sheetUrl: "",        // כתובת ה-Web App של Apps Script שמחובר לגיליון (https://script.google.com/macros/s/.../exec)
   formUrl: "",         // אופציונלי: קישור לטופס Google במקום וואטסאפ
   siteUrl: "https://omerpines.github.io/orange-peel-trail/"  // הקישור לאתר שמופיע בהודעה לקבוצת הבניין
@@ -87,7 +87,7 @@ function renderUpdates(){
   const txt=$("updText"), row=$("updRow"); if(!txt||!row) return;
   row.textContent="";
   if(CONFIG.channelUrl){
-    txt.textContent="הודעות על סבבים חדשים, ביטולים בגלל גשם ותזכורות יוצאות בקבוצת העדכונים בוואטסאפ. רק מנהלי היוזמה כותבים בה, ומספרי הטלפון של המשתתפים לא מוצגים לשאר החברים. מצטרפים בלחיצה, ואפשר לצאת מתי שרוצים.";
+    txt.textContent="הודעות על סבבים חדשים, ביטולים בגלל גשם ותזכורות יוצאות בקבוצת העדכונים בוואטסאפ. רק מנהלי היוזמה כותבים בה. מספרי הטלפון של חברי הקבוצה גלויים לכל החברים. מצטרפים בלחיצה, ואפשר לצאת מתי שרוצים.";
     const a=document.createElement("a"); a.className="btn primary"; a.href=CONFIG.channelUrl; a.target="_blank"; a.rel="noopener"; a.textContent="הצטרפות לקבוצת העדכונים"; row.append(a);
   } else {
     txt.textContent="קבוצת עדכונים בוואטסאפ תיפתח בקרוב, והקישור יופיע כאן. עד אז, מי שסימן בהרשמה \"אפשר לעדכן אותי\" יקבל הודעה ישירה על כל סבב חדש ועל ביטולים.";
