@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>לוועדי בתים | שביל קליפות התפוזים</title>
+<meta name="description" content="רישום בניין לשביל קליפות התפוזים: מה הבניין מקבל, מה אנחנו מתחייבים, וטופס קצר לוועד.">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="לוועדי בתים | שביל קליפות התפוזים">
+<meta property="og:description" content="רישום בניין לשביל קליפות התפוזים: מה הבניין מקבל, מה אנחנו מתחייבים, וטופס קצר לוועד.">
+<meta property="og:image" content="https://omerpines.github.io/orange-peel-trail/welcome.png">
+<meta property="og:url" content="https://omerpines.github.io/orange-peel-trail/committees.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+<div class="topbar"><a class="homelink" href="index.html"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 38 C 112 14, 146 10, 160 22 C 146 40, 118 46, 100 38 Z" fill="#2f5d3a"/><path d="M100 38 C 118 30, 138 24, 156 24" stroke="#8fc79c" stroke-width="3" fill="none"/><circle cx="100" cy="112" r="70" fill="#e8771e"/><path d="M100 112 m-48 0 a48 48 0 1 0 96 0 a36 36 0 1 0 -72 0 a24 24 0 1 0 48 0 a12 12 0 1 0 -24 0" stroke="#fde9d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="100" cy="112" r="70" fill="none" stroke="#9a3b12" stroke-width="4" opacity=".35"/></svg><span>שביל קליפות התפוזים</span></a><nav class="toc" aria-label="ניווט באתר"><a href="index.html">בית</a><a href="rounds.html">סבבים</a><a href="register.html">הרשמה</a><a href="invite.html">פנייה לוועד</a><a href="gear.html">ציוד וכלים</a><a href="learn.html">לומדים בשביל</a><a href="committees.html" aria-current="page">לוועדי בתים</a><a href="faq.html">שאלות</a></nav></div>
+<header class="pagehead"><h1>לוועדי בתים</h1><p>יש לכם עץ פרי בגינה המשותפת? אנחנו קוטפים רק בבניינים שהוועד שלהם אישר, ובמועד שהוועד בוחר.</p></header><main class="trail">
+<section class="stop" id="committees">
+  <p class="sub">יש לכם עץ הדר בגינה המשותפת? אנחנו קוטפים רק בבניינים שהוועד שלהם אישר, ובמועד שהוועד בוחר.</p>
+  <div class="cards">
+    <div class="card"><h3>מה הבניין מקבל</h3><ul><li>עץ נקי מפרי רקוב, ופחות זבובים וצרעות.</li><li>גינה מסודרת יותר מכפי שמצאנו אותה.</li><li>שקיות פרי לדיירים בלובי.</li></ul></div>
+    <div class="card"><h3>מה אנחנו מתחייבים</h3><ul><li>עד 6 משפחות, עם מדריך, כ-20 דקות בגינה.</li><li>עד 10 פירות מכל עץ, אלא אם יש בגינה הרבה עצים או יבול גדול.</li><li>בלי כניסה לבניין. סולם רק אם הוועד מספק אותו, ועליו עולים רק מבוגרים.</li><li>עלון לדיירים שבוע מראש. התנגדות של דייר מבטלת את הקטיף בבניין.</li><li>הרכבה על העץ רק אם הוועד סימן שהוא מאשר, ועל ענף אחד או שניים בלבד.</li></ul></div>
+  </div>
+  <h3 style="margin-top:8px">רישום הבניין לקטיף</h3>
+  <p class="sub">טופס לנציגי ועד הבית. בסיום נפתחת הודעה מוכנה אלינו, ונחזור אליכם לתאם מועד ומסלול.</p>
+  <form id="comForm" novalidate>
+    <input type="text" id="cWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+    <div class="grid2">
+      <label for="cName"><span>שם נציג/ת הוועד <span class="req">*</span></span><input id="cName" autocomplete="name"></label>
+      <label for="cRole">תפקיד<select id="cRole"><option>יו"ר הוועד</option><option>חבר/ת ועד</option><option>גזבר/ית</option><option>נציג/ה מטעם הוועד</option><option>חברת ניהול</option></select></label>
+      <label for="cPhone"><span>טלפון לתיאום <span class="req">*</span></span><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel"></label>
+      <label for="cAddr"><span>רחוב ומספר בית <span class="req">*</span></span><input id="cAddr" placeholder="לדוגמה: טום לנטוס 12"></label>
+      <label for="cTrees">כמה עצי פרי בגינה<input id="cTrees" type="number" min="1" max="30" inputmode="numeric"></label>
+      <label for="cWhere">איפה העצים<select id="cWhere"><option value="">לא נבחר</option><option>בחזית הבניין</option><option>בחצר האחורית</option><option>בצד הבניין</option><option>בכמה מקומות</option></select></label>
+    </div>
+    <fieldset><legend>אילו עצים יש</legend><div class="opts" id="cTypes"></div></fieldset>
+    <fieldset><legend>סבבים שהוועד מאשר</legend><div class="opts" id="cRounds"></div></fieldset>
+    <fieldset>
+      <legend>סולם ליום הקטיף <span class="req">*</span></legend>
+      <div class="opts">
+        <label class="check" for="lYes"><input type="radio" name="ladder" id="lYes" value="yes"><span>יש לוועד סולם ונוכל לספק אותו ביום הקטיף</span></label>
+        <label class="check" for="lNo"><input type="radio" name="ladder" id="lNo" value="no"><span>אין לנו סולם</span></label>
+      </div>
+      <div class="grid2" id="ladderMore" hidden>
+        <label for="lType">סוג הסולם<select id="lType"><option>סולם עומד (משולש)</option><option>סולם נשען</option><option>שרפרף מדרגות</option><option>לא בטוח/ה</option></select></label>
+        <label for="lSteps">מספר מדרגות או גובה<input id="lSteps" placeholder="לדוגמה: 6 מדרגות, או 1.8 מטר"></label>
+      </div>
+      <p class="note">את הסולם מפעילים רק מבוגרים, ונבדוק אותו לפני שמתחילים. סולם רעוע לא נשתמש בו.</p>
+    </fieldset>
+    <div class="grid2">
+      <label for="cMax">כמה משפחות הגינה יכולה לקבל<select id="cMax"><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label>
+      <label for="cSpray">ריסוס בחודש האחרון<select id="cSpray"><option>לא</option><option>כן</option><option>לא יודע/ת</option></select></label>
+      <label for="cTap">ברז מים בגינה<select id="cTap"><option>יש</option><option>אין</option></select></label>
+      <label for="cSplit">חלוקת הפרי<select id="cSplit"><option>חצי לדיירים, חצי לקוטפים</option><option>הכל לקוטפים</option><option>נחליט יחד</option></select></label>
+    </div>
+    <label for="cNotes">הערות (גישה לגינה, שעות שקטות, דייר שביקש שלא ייכנסו ליד הדירה)<textarea id="cNotes" rows="2"></textarea></label>
+    <div style="display:grid;gap:8px">
+      <label class="check" for="cGraft"><input type="checkbox" id="cGraft"><span>הוועד מאשר הדגמת הרכבה על ענף אחד או שניים של העץ בגינה.</span></label>
+      <label class="check" for="cOk"><input type="checkbox" id="cOk"><span>הוועד מאשר את השתתפות הבניין, ונתלה לדיירים הודעה לפחות שבוע לפני הקטיף. <span class="req">*</span></span></label>
+      <label class="check" for="cCUpd"><input type="checkbox" id="cCUpd"><span>אפשר לפנות אליי גם בעונות הבאות (זיתים, שסק ועוד).</span></label>
+    </div>
+    <p class="note">הטלפון משמש רק לתיאום הקטיף בבניין, לא מועבר לאף אחד ונמחק לפי בקשה.</p>
+    <p class="err" id="cErr" hidden></p>
+    <div><button class="btn primary" type="submit">הכנת הודעת האישור</button></div>
+    <div class="out" id="cOut" hidden>
+      <strong id="cOutHead">ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <pre id="cMsg"></pre>
+      <div class="cta-row">
+        <a class="btn primary" id="cWa" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+        <button class="btn ghost" type="button" id="cCopy">העתקת ההודעה</button>
+      </div>
+      <p class="note" id="cWaNote"></p>
+    </div>
+  </form>
+</section>
+</main><div class="nextbar"><b>שאלות לפני שנרשמים?</b><a class="btn primary" href="faq.html">שאלות נפוצות</a></div>
+<footer>
+  <p>פרויקט שביל קליפות התפוזים השכונתי · קריית השרון, נתניה, בשיתוף מרכז קהילתי קריית השרון.</p>
+  <p id="footPrivacy">פרטיות: פרטי ההרשמה משמשים רק לתיאום הסבבים ולא מועברים לאף אחד. למחיקה, פנו למארגן היוזמה.</p>
+</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

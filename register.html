@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הרשמה לסבב | שביל קליפות התפוזים</title>
+<meta name="description" content="הרשמה משפחתית לסבב קטיף בשביל קליפות התפוזים.">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="הרשמה לסבב | שביל קליפות התפוזים">
+<meta property="og:description" content="הרשמה משפחתית לסבב קטיף בשביל קליפות התפוזים.">
+<meta property="og:image" content="https://omerpines.github.io/orange-peel-trail/welcome.png">
+<meta property="og:url" content="https://omerpines.github.io/orange-peel-trail/register.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+<div class="topbar"><a class="homelink" href="index.html"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 38 C 112 14, 146 10, 160 22 C 146 40, 118 46, 100 38 Z" fill="#2f5d3a"/><path d="M100 38 C 118 30, 138 24, 156 24" stroke="#8fc79c" stroke-width="3" fill="none"/><circle cx="100" cy="112" r="70" fill="#e8771e"/><path d="M100 112 m-48 0 a48 48 0 1 0 96 0 a36 36 0 1 0 -72 0 a24 24 0 1 0 48 0 a12 12 0 1 0 -24 0" stroke="#fde9d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="100" cy="112" r="70" fill="none" stroke="#9a3b12" stroke-width="4" opacity=".35"/></svg><span>שביל קליפות התפוזים</span></a><nav class="toc" aria-label="ניווט באתר"><a href="index.html">בית</a><a href="rounds.html">סבבים</a><a href="register.html" aria-current="page">הרשמה</a><a href="invite.html">פנייה לוועד</a><a href="gear.html">ציוד וכלים</a><a href="learn.html">לומדים בשביל</a><a href="committees.html">לוועדי בתים</a><a href="faq.html">שאלות</a></nav></div>
+<header class="pagehead"><div class="stepno">צעד 1 מתוך 3</div><h1>נרשמים לסבב</h1><p>ממלאים פרטים קצרים: מי מגיע, לאיזה סבב, ומה הכתובת של הבניין שלכם.</p></header><main class="trail">
+<section class="stop" id="register">
+  <p class="sub">ממלאים את הטופס, ובסיום נפתחת הודעת וואטסאפ מוכנה למספר של היוזמה. ההרשמה נקלטת כשההודעה נשלחת, ונחזור אליכם עם אישור ונקודת המפגש.</p>
+  <form id="regForm" novalidate>
+    <input type="text" id="fWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+    <div class="grid2">
+      <label for="fName"><span>שם ההורה <span class="req">*</span></span><input id="fName" autocomplete="name" required></label>
+      <label for="fPhone"><span>טלפון <span class="req">*</span></span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel"></label>
+      <label for="fRound"><span>סבב <span class="req">*</span></span><select id="fRound" required></select></label>
+      <label for="fAdults"><span>כמה הורים או מבוגרים יגיעו <span class="req">*</span></span><input id="fAdults" type="number" min="1" max="6" value="1" inputmode="numeric"></label>
+      <label for="fKids"><span>כמה ילדים יגיעו <span class="req">*</span></span><input id="fKids" type="number" min="0" max="8" value="2" inputmode="numeric"></label>
+      <label for="fAges">גילאי הילדים<input id="fAges" placeholder="לדוגמה: 5, 8"></label>
+      <label for="fStreet"><span>הבניין שלכם: רחוב ומספר <span class="req">*</span></span><input id="fStreet" placeholder="לדוגמה: טום לנטוס 12" autocomplete="address-line1"></label>
+      <label for="fTree">יש עץ פרי בגינה המשותפת?<select id="fTree"><option>כן</option><option>לא</option><option>לא בטוח/ה</option></select></label>
+    </div>
+    <label for="fNotes">אלרגיות, נגישות (עגלה, כיסא גלגלים) או משהו שכדאי שנדע<textarea id="fNotes" rows="2"></textarea></label>
+    <div class="grid2" style="gap:8px">
+      <label class="check" for="cResp"><input type="checkbox" id="cResp"><span>הילדים באחריותי ובהשגחתי לכל אורך הפעילות, וקראתי את כללי הבטיחות. <span class="req">*</span></span></label>
+      <label class="check" for="cVol"><input type="checkbox" id="cVol"><span>אשמח להיות הורה תורן בסבב (עוזר בסוף הקבוצה או עם הארגזים).</span></label>
+      <label class="check" for="cPhoto"><input type="checkbox" id="cPhoto"><span>מותר לפרסם תמונות שלנו מהפעילות בעמוד היוזמה.</span></label>
+      <label class="check" for="cUpd"><input type="checkbox" id="cUpd"><span>אפשר לעדכן אותי על סבבים בעונות הבאות.</span></label>
+    </div>
+    <p class="note" id="famPrivacy">הפרטים נאספים רק כדי לתאם את הסבב, לא מועברים לאף אחד, ונמחקים לפי בקשה או 60 יום אחרי סוף העונה.</p>
+    <p class="err" id="formErr" hidden></p>
+    <div><button class="btn primary" type="submit">הכנת הודעת ההרשמה</button></div>
+    <div class="out" id="out" hidden>
+      <strong id="outHead">ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <pre id="msg"></pre>
+      <div class="cta-row">
+        <a class="btn primary" id="waLink" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+        <button class="btn ghost" type="button" id="copyBtn">העתקת ההודעה</button>
+      </div>
+      <p class="note" id="waNote"></p>
+      <div class="callout"><b>הצעד הבא: מזמינים את ועד הבית.</b> הכנו לכם הזמנה מוכנה, עם הכתובת והשם שלכם. <a class="btn primary" id="inviteLink" href="invite.html" style="margin-top:8px">לצעד 2</a></div>
+    </div>
+  </form>
+</section>
+</main><div class="nextbar"><b>נרשמתם? עכשיו מזמינים את הוועד.</b><a class="btn primary" href="invite.html">לצעד 2: פנייה לוועד</a></div>
+<footer>
+  <p>פרויקט שביל קליפות התפוזים השכונתי · קריית השרון, נתניה, בשיתוף מרכז קהילתי קריית השרון.</p>
+  <p id="footPrivacy">פרטיות: פרטי ההרשמה משמשים רק לתיאום הסבבים ולא מועברים לאף אחד. למחיקה, פנו למארגן היוזמה.</p>
+</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
