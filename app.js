@@ -141,6 +141,7 @@ if(form) form.addEventListener("submit",async e=>{
 // מחזיר null אם אין חיבור לגיליון, אחרת {ok, waitlist}
 async function saveToSheet(type,fields,hp){
   if(!CONFIG.sheetUrl) return null;
+  if(fields["טלפון"]) fields["טלפון"]="'"+fields["טלפון"]; // שומר את ה-0 בתחילת המספר בגיליון
   const body=JSON.stringify({type,fields,website:hp});
   try{
     const r=await fetch(CONFIG.sheetUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
