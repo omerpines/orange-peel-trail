@@ -97,6 +97,7 @@ input,select,textarea{font:inherit;font-weight:400;padding:10px 12px;border-radi
 .check input{width:auto;margin-top:5px;accent-color:var(--peel)}
 .req{color:var(--warn)}
 [hidden]{display:none!important}
+.hp{position:absolute;width:1px;height:1px;padding:0;margin:0;border:0;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
 .note{font-size:.9rem;color:var(--muted)}
 .out{border-radius:12px;background:var(--leaf-soft);padding:16px;display:grid;gap:10px}
 .out pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;font:inherit;font-size:.95rem;background:var(--surface);border-radius:8px;padding:12px;border:1px solid var(--line)}
@@ -187,8 +188,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
   <h2>צעד 1: נרשמים לסבב</h2>
   <p class="sub">ממלאים את הטופס, ובסיום נפתחת הודעת וואטסאפ מוכנה למספר של היוזמה. ההרשמה נקלטת כשההודעה נשלחת, ונחזור אליכם עם אישור ונקודת המפגש.</p>
   <form id="regForm" novalidate>
+    <input type="text" id="fWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
     <div class="grid2">
       <label for="fName"><span>שם ההורה <span class="req">*</span></span><input id="fName" autocomplete="name" required></label>
+      <label for="fPhone"><span>טלפון <span class="req">*</span></span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel"></label>
       <label for="fRound"><span>סבב <span class="req">*</span></span><select id="fRound" required></select></label>
       <label for="fAdults"><span>כמה הורים או מבוגרים יגיעו <span class="req">*</span></span><input id="fAdults" type="number" min="1" max="6" value="1" inputmode="numeric"></label>
       <label for="fKids"><span>כמה ילדים יגיעו <span class="req">*</span></span><input id="fKids" type="number" min="0" max="8" value="2" inputmode="numeric"></label>
@@ -203,11 +206,11 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
       <label class="check" for="cPhoto"><input type="checkbox" id="cPhoto"><span>מותר לפרסם תמונות שלנו מהפעילות בעמוד היוזמה.</span></label>
       <label class="check" for="cUpd"><input type="checkbox" id="cUpd"><span>אפשר לעדכן אותי על סבבים בעונות הבאות.</span></label>
     </div>
-    <p class="note">הפרטים נאספים רק כדי לתאם את הסבב, לא מועברים לאף אחד, ונמחקים לפי בקשה או 60 יום אחרי סוף העונה. האתר עצמו לא שומר את מה שהוקלד: הפרטים מגיעים אלינו רק בהודעה שאתם שולחים.</p>
+    <p class="note" id="famPrivacy">הפרטים נאספים רק כדי לתאם את הסבב, לא מועברים לאף אחד, ונמחקים לפי בקשה או 60 יום אחרי סוף העונה.</p>
     <p class="err" id="formErr" hidden></p>
     <div><button class="btn primary" type="submit">הכנת הודעת ההרשמה</button></div>
     <div class="out" id="out" hidden>
-      <strong>ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <strong id="outHead">ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
       <pre id="msg"></pre>
       <div class="cta-row">
         <a class="btn primary" id="waLink" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
@@ -380,6 +383,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
   <h3 style="margin-top:8px">רישום הבניין לקטיף</h3>
   <p class="sub">טופס לנציגי ועד הבית. בסיום נפתחת הודעה מוכנה אלינו, ונחזור אליכם לתאם מועד ומסלול.</p>
   <form id="comForm" novalidate>
+    <input type="text" id="cWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
     <div class="grid2">
       <label for="cName"><span>שם נציג/ת הוועד <span class="req">*</span></span><input id="cName" autocomplete="name"></label>
       <label for="cRole">תפקיד<select id="cRole"><option>יו"ר הוועד</option><option>חבר/ת ועד</option><option>גזבר/ית</option><option>נציג/ה מטעם הוועד</option><option>חברת ניהול</option></select></label>
@@ -403,10 +407,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
       <p class="note">את הסולם מפעילים רק מבוגרים, ונבדוק אותו לפני שמתחילים. סולם רעוע לא נשתמש בו.</p>
     </fieldset>
     <div class="grid2">
-      <label for="cMax">כמה משפחות הגינה יכולה לקבל<select id="cMax"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+      <label for="cMax">כמה משפחות הגינה יכולה לקבל<select id="cMax"><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label>
       <label for="cSpray">ריסוס בחודש האחרון<select id="cSpray"><option>לא</option><option>כן</option><option>לא יודע/ת</option></select></label>
       <label for="cTap">ברז מים בגינה<select id="cTap"><option>יש</option><option>אין</option></select></label>
-      <label for="cSplit">חלוקת הפרי<select id="cSplit"><option>חצי לדיירים, חצי לקוטפים</option><option>הכל לדיירים</option><option>הכל לקוטפים</option><option>נחליט יחד</option></select></label>
+      <label for="cSplit">חלוקת הפרי<select id="cSplit"><option>חצי לדיירים, חצי לקוטפים</option><option>הכל לקוטפים</option><option>נחליט יחד</option></select></label>
     </div>
     <label for="cNotes">הערות (גישה לגינה, שעות שקטות, דייר שביקש שלא ייכנסו ליד הדירה)<textarea id="cNotes" rows="2"></textarea></label>
     <div style="display:grid;gap:8px">
@@ -419,7 +423,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
     <p class="err" id="cErr" hidden></p>
     <div><button class="btn primary" type="submit">הכנת הודעת האישור</button></div>
     <div class="out" id="cOut" hidden>
-      <strong>ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <strong id="cOutHead">ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
       <pre id="cMsg"></pre>
       <div class="cta-row">
         <a class="btn primary" id="cWa" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
@@ -447,7 +451,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
 
 <footer>
   <p>פרויקט שביל קליפות התפוזים השכונתי · קריית השרון, נתניה, בשיתוף מרכז קהילתי קריית השרון.</p>
-  <p>פרטיות: האתר לא שומר מידע. פרטי ההרשמה מגיעים אלינו רק בהודעה שאתם שולחים, ומשמשים לתיאום הסבב בלבד. למחיקה, שלחו "מחיקה" לאותו מספר.</p>
+  <p id="footPrivacy">פרטיות: פרטי ההרשמה משמשים רק לתיאום הסבבים ולא מועברים לאף אחד. למחיקה, פנו למארגן היוזמה.</p>
 </footer>
 </div>
 
@@ -456,6 +460,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:v
 const CONFIG = {
   waNumber: "",        // מספר הוואטסאפ של היוזמה בפורמט בינלאומי, בלי + ובלי מקפים. לדוגמה: 972501234567
   channelUrl: "",      // קישור הזמנה לקהילת/קבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
+  sheetUrl: "",        // כתובת ה-Web App של Apps Script שמחובר לגיליון (https://script.google.com/macros/s/.../exec)
   formUrl: "",         // אופציונלי: קישור לטופס Google במקום וואטסאפ
   siteUrl: "https://omerpines.github.io/orange-peel-trail/"  // הקישור לאתר שמופיע בהודעה לקבוצת הבניין
 };
@@ -540,12 +545,13 @@ function renderUpdates(){
 }
 
 const form=document.getElementById("regForm");
-form.addEventListener("submit",e=>{
+form.addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>document.getElementById(id).value.trim(), ch=id=>document.getElementById(id).checked;
   const err=document.getElementById("formErr"); err.hidden=true;
   const miss=[];
   if(!v("fName"))miss.push("שם");
+  if(!v("fPhone"))miss.push("טלפון");
   if(!v("fRound"))miss.push("סבב");
   if(!(Number(v("fAdults"))>=1))miss.push("מספר מבוגרים");
   if(v("fKids")==="")miss.push("מספר ילדים");
@@ -557,6 +563,7 @@ form.addEventListener("submit",e=>{
     "הרשמה לשביל קליפות התפוזים",
     `סבב: ${fmt(parse(ev.date))} (${ev.id})`,
     `שם: ${v("fName")}`,
+    `טלפון: ${v("fPhone")}`,
     `מבוגרים: ${v("fAdults")||1} · ילדים: ${v("fKids")||0}${v("fAges")?" · גילאים: "+v("fAges"):""}`,
     `בניין: ${v("fStreet")} · עץ פרי בגינה: ${v("fTree")}`,
     v("fNotes")?`הערות: ${v("fNotes")}`:"",
@@ -568,15 +575,25 @@ form.addEventListener("submit",e=>{
   const text=lines.join("\n");
   document.getElementById("msg").textContent=text;
   const wa=document.getElementById("waLink"), note=document.getElementById("waNote");
+  const saved=await saveToSheet("family",{"שם ההורה":v("fName"),"טלפון":v("fPhone"),"סבב":ev.id,"תאריך הסבב":fmt(parse(ev.date)),"מבוגרים":v("fAdults")||"1","ילדים":v("fKids")||"0","גילאי הילדים":v("fAges"),"בניין":v("fStreet"),"עץ פרי בגינה":v("fTree"),"הערות":v("fNotes"),"אחריות הורים":"מאשר/ת","הורה תורן":ch("cVol")?"כן":"לא","אישור תמונות":ch("cPhoto")?"כן":"לא","עדכונים בעונות הבאות":ch("cUpd")?"כן":"לא"},v("fWeb"));
+  document.getElementById("outHead").textContent=saved?"נרשמתם! נחזור אליכם עם אישור ונקודת המפגש.":"ההודעה מוכנה. שלב אחרון: לשלוח אותה.";
   if(CONFIG.formUrl){wa.href=CONFIG.formUrl; wa.textContent="מעבר לטופס ההרשמה"; note.textContent="אפשר להעתיק את הפרטים מכאן לטופס."}
   else if(CONFIG.waNumber){wa.href=waUrl(text); wa.textContent="שליחה בוואטסאפ"; note.textContent="אם וואטסאפ לא נפתח, העתיקו את ההודעה ושלחו אותה ידנית."}
   else {wa.hidden=true; note.textContent="מספר הוואטסאפ של היוזמה יפורסם כאן בקרוב. בינתיים אפשר להעתיק את ההודעה."}
+  if(saved){wa.hidden=true; note.textContent="הפרטים נשמרו אצלנו. אפשר להעתיק אותם לעצמכם לתזכורת."}
   const sn=document.getElementById("sName"); if(!sn.value.trim())sn.value=v("fName").split(" ")[0];
   const sb=document.getElementById("sBld"); if(!sb.value.trim())sb.value=v("fStreet");
   document.getElementById("sTree").checked=v("fTree")!=="לא";
   renderShare();
   const out=document.getElementById("out"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
 });
+async function saveToSheet(type,fields,hp){
+  if(!CONFIG.sheetUrl) return false;
+  try{
+    await fetch(CONFIG.sheetUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({type,fields,website:hp})});
+    return true;
+  }catch(e){return false}
+}
 function wireCopy(btnId,preId){
   const b=document.getElementById(btnId), pre=document.getElementById(preId);
   b.addEventListener("click",()=>{
@@ -620,7 +637,7 @@ function renderShare(){
 document.getElementById("shareForm").addEventListener("submit",e=>e.preventDefault());
 
 /* --- טופס ועד הבית --- */
-const TREE_TYPES=["לימון","תפוז","קלמנטינה","אשכולית","פומלה","זית","אבוקדו","שסק","אחר"];
+const TREE_TYPES=["לימון","תפוז","קלמנטינה","אשכולית","פומלה","חושחש","זית","אבוקדו","שסק","רימון","גפן (ענבים)","תאנה","תות עץ","אפרסמון","מנגו","פקאן","אחר"];
 function buildOpts(boxId,name,items){
   const box=document.getElementById(boxId); box.textContent="";
   items.forEach((it,i)=>{
@@ -640,7 +657,7 @@ buildOpts("cTypes","ct",TREE_TYPES.map(t=>({value:t,label:t})));
 document.querySelectorAll('input[name="ladder"]').forEach(r=>r.addEventListener("change",()=>{
   document.getElementById("ladderMore").hidden=!document.getElementById("lYes").checked;
 }));
-document.getElementById("comForm").addEventListener("submit",e=>{
+document.getElementById("comForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>document.getElementById(id).value.trim();
   const err=document.getElementById("cErr"); err.hidden=true;
@@ -675,6 +692,10 @@ document.getElementById("comForm").addEventListener("submit",e=>{
   const text=lines.join("\n");
   document.getElementById("cMsg").textContent=text;
   setSend(document.getElementById("cWa"),document.getElementById("cWaNote"),text);
+  const ck=id=>document.getElementById(id).checked;
+  const saved=await saveToSheet("building",{"כתובת הבניין":v("cAddr"),"שם נציג הוועד":v("cName"),"תפקיד":v("cRole"),"טלפון":v("cPhone"),"עצים":types.join(", "),"מספר עצים":v("cTrees"),"מיקום העצים":v("cWhere"),"סבבים מאושרים":rounds.join(", "),"סולם":ladder.value==="yes"?"יש":"אין","סוג הסולם":ladder.value==="yes"?v("lType"):"","מדרגות או גובה":ladder.value==="yes"?v("lSteps"):"","משפחות בגינה (עד)":v("cMax"),"ריסוס בחודש האחרון":v("cSpray"),"ברז מים":v("cTap"),"חלוקת הפרי":v("cSplit"),"מאשרים הרכבה":ck("cGraft")?"כן":"לא","מאשרים שבת":ck("cShab")?"כן":"לא","אישור הוועד":"כן","פנייה בעונות הבאות":ck("cCUpd")?"כן":"לא","הערות":v("cNotes")},v("cWeb"));
+  document.getElementById("cOutHead").textContent=saved?"תודה! הבניין נרשם, ונחזור אליכם לתאם מועד ומסלול.":"ההודעה מוכנה. שלב אחרון: לשלוח אותה.";
+  if(saved){document.getElementById("cWa").hidden=true; document.getElementById("cWaNote").textContent="הפרטים נשמרו אצלנו."}
   const out=document.getElementById("cOut"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
 });
 
