@@ -8,12 +8,12 @@ const CONFIG = {
 };
 const EVENTS = [ // status: open / tbc (מועד לאישור) / full. rain ריק = בגשם עוברים לסבב הבא
   {id:"R1", date:"2026-11-27", time:"12:00 או 13:00", title:"סבב פתיחה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
-  {id:"R2", date:"2026-12-11", time:"12:00 או 13:00", title:"סבב חנוכה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
-  {id:"R3", date:"2026-12-25", time:"12:00 או 13:00", title:"סבב סוף דצמבר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
-  {id:"R4", date:"2027-01-08", time:"12:00 או 13:00", title:"סבב ינואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
-  {id:"R5", date:"2027-01-22", time:"12:00 או 13:00", title:"סבב ערב ט\"ו בשבט", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc", note:"תחנה מיוחדת על שבעת המינים"},
-  {id:"R6", date:"2027-02-05", time:"12:00 או 13:00", title:"סבב פברואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
-  {id:"R7", date:"2027-02-19", time:"12:00 או 13:00", title:"סבב סוף העונה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"}
+  {id:"R2", date:"2026-12-11", time:"12:00 או 13:00", title:"סבב חנוכה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R3", date:"2026-12-25", time:"12:00 או 13:00", title:"סבב סוף דצמבר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R4", date:"2027-01-08", time:"12:00 או 13:00", title:"סבב ינואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R5", date:"2027-01-22", time:"12:00 או 13:00", title:"סבב ערב ט\"ו בשבט", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open", note:"תחנה מיוחדת על שבעת המינים"},
+  {id:"R6", date:"2027-02-05", time:"12:00 או 13:00", title:"סבב פברואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R7", date:"2027-02-19", time:"12:00 או 13:00", title:"סבב סוף העונה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"}
 ];
 const SEASONS = [ // months 1..12, est = not verified
   {name:"זית (מסיק)", m:[9,10,11,12,1], est:false},
