@@ -1,19 +1,19 @@
 /* ===== הגדרות: לעדכן כאן ===== */
 const CONFIG = {
   waNumber: "",        // מספר הוואטסאפ של היוזמה בפורמט בינלאומי, בלי + ובלי מקפים. לדוגמה: 972501234567
-  channelUrl: "",      // קישור הזמנה לקבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
+  channelUrl: "https://chat.whatsapp.com/FR8eUckPnGV6BjapSV4ThV",      // קישור הזמנה לקבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
   sheetUrl: "",        // כתובת ה-Web App של Apps Script שמחובר לגיליון (https://script.google.com/macros/s/.../exec)
   formUrl: "",         // אופציונלי: קישור לטופס Google במקום וואטסאפ
   siteUrl: "https://omerpines.github.io/orange-peel-trail/"  // הקישור לאתר שמופיע בהודעה לקבוצת הבניין
 };
 const EVENTS = [ // status: open / tbc (מועד לאישור) / full. rain ריק = בגשם עוברים לסבב הבא
-  {id:"R1", date:"2026-11-27", time:"12:00 או 13:00", title:"סבב פתיחה", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"open"},
-  {id:"R2", date:"2026-12-11", time:"12:00 או 13:00", title:"סבב חנוכה", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc"},
-  {id:"R3", date:"2026-12-25", time:"12:00 או 13:00", title:"סבב סוף דצמבר", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc"},
-  {id:"R4", date:"2027-01-08", time:"12:00 או 13:00", title:"סבב ינואר", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc"},
-  {id:"R5", date:"2027-01-22", time:"12:00 או 13:00", title:"סבב ערב ט\"ו בשבט", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc", note:"תחנה מיוחדת על שבעת המינים"},
-  {id:"R6", date:"2027-02-05", time:"12:00 או 13:00", title:"סבב פברואר", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc"},
-  {id:"R7", date:"2027-02-19", time:"12:00 או 13:00", title:"סבב סוף העונה", place:"נקודת המפגש תישלח לנרשמים", seats:10, status:"tbc"}
+  {id:"R1", date:"2026-11-27", time:"12:00 או 13:00", title:"סבב פתיחה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R2", date:"2026-12-11", time:"12:00 או 13:00", title:"סבב חנוכה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R3", date:"2026-12-25", time:"12:00 או 13:00", title:"סבב סוף דצמבר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R4", date:"2027-01-08", time:"12:00 או 13:00", title:"סבב ינואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R5", date:"2027-01-22", time:"12:00 או 13:00", title:"סבב ערב ט\"ו בשבט", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc", note:"תחנה מיוחדת על שבעת המינים"},
+  {id:"R6", date:"2027-02-05", time:"12:00 או 13:00", title:"סבב פברואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R7", date:"2027-02-19", time:"12:00 או 13:00", title:"סבב סוף העונה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"}
 ];
 const SEASONS = [ // months 1..12, est = not verified
   {name:"זית (מסיק)", m:[9,10,11,12,1], est:false},
@@ -52,14 +52,15 @@ function renderEvents(){
   let shown=0;
   EVENTS.forEach(ev=>{
     const d=parse(ev.date), past=d<today;
-    if(!past&&sel){const o=document.createElement("option"); o.value=ev.id; o.textContent=`${fmt(d)} · ${ev.title}`; sel.append(o);}
+    const left=seatsLeft(ev), full=ev.status==="full"||left===0;
+    if(!past&&sel){const o=document.createElement("option"); o.value=ev.id; o.textContent=`${fmt(d)} · ${ev.title}${full?" (מלא, רשימת המתנה)":""}`; sel.append(o);}
     if(!list) return;
     if(limit&&(past||shown>=limit)) return;
     shown++;
     const el=document.createElement("article"); el.className="event"+(past?" past":"");
     el.innerHTML=`<div class="date"><b>${d.getDate()}</b><small>${HE_MONTHS[d.getMonth()]} ${d.getFullYear()}</small></div>
       <div style="display:grid;gap:4px;min-width:0"><h3></h3><div class="meta"><span>יום ${DAYS[d.getDay()]} · ${ev.time}</span><span class="pl"></span></div>
-      <div class="meta"><span class="chip">${past?"התקיים":(ev.status==="full"?"מלא, רשימת המתנה":"ההרשמה פתוחה")}</span>${!past&&ev.status==="tbc"?'<span class="chip peel">מועד לאישור</span>':""}<span class="chip peel">${ev.rain?"בגשם: "+parse(ev.rain).getDate()+" "+HE_MONTHS[parse(ev.rain).getMonth()]:"בגשם: עוברים לסבב הבא"}</span><span>עד ${ev.seats} משפחות</span></div></div>
+      <div class="meta"><span class="chip">${past?"התקיים":(full?"מלא, רשימת המתנה":(left!==null?`נשארו ${left} מקומות`:"ההרשמה פתוחה"))}</span>${!past&&ev.status==="tbc"?'<span class="chip peel">מועד לאישור</span>':""}<span class="chip peel">${ev.rain?"בגשם: "+parse(ev.rain).getDate()+" "+HE_MONTHS[parse(ev.rain).getMonth()]:"בגשם: עוברים לסבב הבא"}</span><span>עד ${ev.seats} משפחות</span></div></div>
       <div class="links"></div>`;
     el.querySelector("h3").textContent=ev.title+(ev.note?" · "+ev.note:"");
     el.querySelector(".pl").textContent=ev.place;
@@ -70,8 +71,9 @@ function renderEvents(){
     }
     list.append(el);
   });
+  const keep=sel&&sel.dataset.v; if(keep) sel.value=keep;
   const q=new URLSearchParams(location.search).get("r");
-  if(sel&&q&&[...sel.options].some(o=>o.value===q)) sel.value=q;
+  if(sel&&!keep&&q&&[...sel.options].some(o=>o.value===q)) sel.value=q;
 }
 
 function renderSeasons(){
@@ -126,21 +128,34 @@ if(form) form.addEventListener("submit",async e=>{
   document.getElementById("msg").textContent=text;
   const wa=document.getElementById("waLink"), note=document.getElementById("waNote");
   const saved=await saveToSheet("family",{"שם ההורה":v("fName"),"טלפון":v("fPhone"),"סבב":ev.id,"תאריך הסבב":fmt(parse(ev.date)),"מבוגרים":v("fAdults")||"1","ילדים":v("fKids")||"0","גילאי הילדים":v("fAges"),"בניין":v("fStreet"),"עץ פרי בגינה":v("fTree"),"הערות":v("fNotes"),"אחריות הורים":"מאשר/ת","הורה תורן":ch("cVol")?"כן":"לא","אישור תמונות":ch("cPhoto")?"כן":"לא","עדכונים בעונות הבאות":ch("cUpd")?"כן":"לא"},v("fWeb"));
-  document.getElementById("outHead").textContent=saved?"נרשמתם! נחזור אליכם עם אישור ונקודת המפגש.":"ההודעה מוכנה. שלב אחרון: לשלוח אותה.";
+  document.getElementById("outHead").textContent=!saved?"ההודעה מוכנה. שלב אחרון: לשלוח אותה.":(saved.waitlist?"הסבב מלא, ונכנסתם לרשימת ההמתנה. אם יתפנה מקום, נעדכן אתכם.":"נרשמתם! נחזור אליכם עם אישור ונקודת המפגש.");
+  if(saved&&!saved.waitlist&&TAKEN){TAKEN[ev.id]=(TAKEN[ev.id]||0)+1; const sl=$("fRound"); sl.dataset.v=ev.id; renderEvents();}
   if(CONFIG.formUrl){wa.href=CONFIG.formUrl; wa.textContent="מעבר לטופס ההרשמה"; note.textContent="אפשר להעתיק את הפרטים מכאן לטופס."}
   else if(CONFIG.waNumber){wa.href=waUrl(text); wa.textContent="שליחה בוואטסאפ"; note.textContent="אם וואטסאפ לא נפתח, העתיקו את ההודעה ושלחו אותה ידנית."}
   else {wa.hidden=true; note.textContent="מספר הוואטסאפ של היוזמה יפורסם כאן בקרוב. בינתיים אפשר להעתיק את ההודעה."}
   if(saved){wa.hidden=true; note.textContent="הפרטים נשמרו אצלנו. אפשר להעתיק אותם לעצמכם לתזכורת."}
+  if(CONFIG.channelUrl&&!$("grpJoin")){const g=document.createElement("p"); g.id="grpJoin"; g.className="note"; g.innerHTML='עדכונים על הסבב, כולל ביטולים בגלל גשם, יוצאים בקבוצת הוואטסאפ. <a target="_blank" rel="noopener">להצטרפות לקבוצה</a>'; g.querySelector("a").href=CONFIG.channelUrl; note.after(g);}
   store.set("shvil_invite",{b:v("fStreet"),n:v("fName").split(" ")[0],t:v("fTree")!=="לא"});
   const out=document.getElementById("out"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
 });
+// מחזיר null אם אין חיבור לגיליון, אחרת {ok, waitlist}
 async function saveToSheet(type,fields,hp){
-  if(!CONFIG.sheetUrl) return false;
+  if(!CONFIG.sheetUrl) return null;
+  const body=JSON.stringify({type,fields,website:hp});
   try{
-    await fetch(CONFIG.sheetUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({type,fields,website:hp})});
-    return true;
-  }catch(e){return false}
+    const r=await fetch(CONFIG.sheetUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
+    const j=await r.json(); return j&&j.ok?j:null;
+  }catch(e){
+    try{await fetch(CONFIG.sheetUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}); return {ok:true};}catch(e2){return null}
+  }
 }
+// כמה משפחות כבר רשומות בכל סבב (מהגיליון)
+let TAKEN=null, MAXF=6;
+async function loadTaken(){
+  if(!CONFIG.sheetUrl) return;
+  try{const r=await fetch(CONFIG.sheetUrl); const j=await r.json(); if(j&&j.ok){TAKEN=j.taken||{}; MAXF=j.max||MAXF; renderEvents();}}catch(e){}
+}
+const seatsLeft=ev=>TAKEN?Math.max(0,(ev.seats||MAXF)-(TAKEN[ev.id]||0)):null;
 function wireCopy(btnId,preId){
   const b=$(btnId), pre=$(preId); if(!b||!pre) return;
   b.addEventListener("click",()=>{
@@ -168,7 +183,7 @@ function renderShare(){
     "",
     tree?"יש לנו עץ פרי בגינה המשותפת, ואשמח מאוד שהבניין שלנו יירשם כתחנה בשביל.":"אשמח שהבניין שלנו יירשם לשביל, ואם יש בגינה עץ פרי, שיהיה תחנה בקטיף.",
     "",
-    "מה זה דורש מהוועד: אישור, ותליית הודעה לדיירים שבוע לפני. מגיעות עד 10 משפחות עם מדריך, לכ-20 דקות בגינה, בלי כניסה לבניין, ועד 10 פירות מכל עץ. אם יש לוועד סולם, אפשר לסמן שהוא יספק אותו ביום הקטיף.",
+    "מה זה דורש מהוועד: אישור, ותליית הודעה לדיירים שבוע לפני. מגיעות 6 משפחות עם מדריך, לכ-20 דקות בגינה, בלי כניסה לבניין, ועד 10 פירות מכל עץ. אם יש לוועד סולם, אפשר לסמן שהוא יספק אותו ביום הקטיף.",
     "",
     "רישום הבניין בטופס קצר באתר:",
     CONFIG.siteUrl+"committees.html",
@@ -254,4 +269,4 @@ document.getElementById("comForm").addEventListener("submit",async e=>{
 }
 
 (function(){const ev=nextEvent(),el=$("nextDate");if(!el)return;if(ev){const d=parse(ev.date);el.textContent=`${DAYS[d.getDay()]} ${d.getDate()}.${d.getMonth()+1}`}else{document.getElementById("nextPill").hidden=true}})();
-renderEvents(); renderSeasons(); renderUpdates();
+renderEvents(); renderSeasons(); renderUpdates(); loadTaken();
