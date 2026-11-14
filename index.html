@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="פרויקט שכונתי בקריית השרון, נתניה: קטיף משפחתי של פירות הדר בגינות המשותפות, באישור ועדי הבתים.">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="שביל קליפות התפוזים">
+<meta property="og:description" content="קוטפים יחד הדרים בגינות המשותפות של קריית השרון. הסבב הראשון: שישי 27.11.">
+<meta property="og:image" content="https://omerpines.github.io/orange-peel-trail/welcome.png">
+<meta property="og:url" content="https://omerpines.github.io/orange-peel-trail/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>שביל קליפות התפוזים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* Layout: a single scrolling neighborhood guide, RTL, a peel-orange route line running down the start edge connecting the sections like stations on a trail */
+:root{
+  --bg:#fbfaf6; --surface:#ffffff; --ink:#1e2a1f; --muted:#5d6a5c; --line:#dfe4d8;
+  --leaf:#2f5d3a; --peel:#e8771e; --peel-soft:#fde9d6; --leaf-soft:#e6efe3;
+  --warn:#9a3b12;
+  --display:"Secular One","Assistant",system-ui,sans-serif;
+  --body:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a15; --surface:#1b231c; --ink:#eef2ea; --muted:#a9b5a6; --line:#2e3a2f;
+  --leaf:#8fc79c; --peel:#ff9a45; --peel-soft:#3a2614; --leaf-soft:#1f2e22; --warn:#ffb08a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a15; --surface:#1b231c; --ink:#eef2ea; --muted:#a9b5a6; --line:#2e3a2f;
+  --leaf:#8fc79c; --peel:#ff9a45; --peel-soft:#3a2614; --leaf-soft:#1f2e22; --warn:#ffb08a; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;text-wrap:balance;margin:0}
+h2{font-size:1.75rem;color:var(--leaf)}
+h3{font-size:1.2rem}
+p{margin:0}
+a{color:var(--leaf);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--peel);outline-offset:2px}
+
+/* header */
+header{padding-block:28px 24px;display:grid;gap:18px}
+.hero{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:28px 26px 30px;display:grid;gap:16px}
+.hero .big{position:absolute;inset-inline-end:-70px;bottom:-80px;width:260px;height:260px;opacity:.95;pointer-events:none}
+.hero > *:not(.big){position:relative}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:44px;height:44px;flex:none}
+.eyebrow{font-size:.9rem;color:var(--muted);font-weight:700}
+h1{font-size:clamp(2.6rem,9vw,4.4rem);color:var(--leaf);line-height:1.02}
+h1 span{color:var(--peel);display:block}
+.datepill{display:inline-grid;background:var(--leaf);color:var(--bg);border-radius:18px;padding:12px 20px;justify-self:start;line-height:1.15}
+.datepill small{font-size:.9rem;opacity:.85;font-weight:600}
+.datepill b{font-family:var(--display);font-weight:400;font-size:1.9rem}
+.hero-row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.hero-row .facts{color:var(--warn);font-weight:700;max-width:30ch}
+@media (max-width:480px){.hero{padding:22px 18px 26px}.hero .big{width:170px;height:170px;inset-inline-end:-60px;bottom:-60px}}
+.lead{font-size:1.15rem;max-width:58ch;color:var(--ink)}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font:600 1rem var(--body);cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--peel);color:#1d1206}
+.btn.ghost{background:transparent;color:var(--leaf);box-shadow:inset 0 0 0 2px var(--leaf)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.95rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:10px}
+nav.toc a{text-decoration:none;color:var(--muted);font-weight:600}
+nav.toc a:hover{color:var(--leaf)}
+
+/* trail */
+.trail{position:relative;display:grid;gap:56px;margin-top:40px;padding-inline-start:34px}
+.trail::before{content:"";position:absolute;inset-inline-start:9px;top:8px;bottom:8px;border-inline-start:3px dashed var(--peel);opacity:.6}
+.stop{position:relative;display:grid;gap:16px;min-width:0}
+.stop::before{content:"";position:absolute;inset-inline-start:-34px;top:6px;width:21px;height:21px;border-radius:50%;background:radial-gradient(circle,var(--peel-soft) 0 22%,var(--peel) 24%);box-shadow:0 0 0 5px var(--bg)}
+.sub{color:var(--muted);max-width:62ch}
+
+/* events */
+.events{display:grid;gap:12px}
+.event{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start}
+.date{font-family:var(--display);text-align:center;min-width:64px;color:var(--leaf);line-height:1.1}
+.date b{display:block;font-size:2rem;font-weight:400}
+.date small{font-size:.85rem;color:var(--muted);font-family:var(--body);font-weight:600}
+.event h3{font-size:1.15rem}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:.95rem}
+.chip{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--leaf-soft);color:var(--leaf)}
+.chip.peel{background:var(--peel-soft);color:var(--warn)}
+.event .links{grid-column:2;display:flex;flex-wrap:wrap;gap:12px;font-size:.95rem}
+.past{opacity:.55}
+
+/* form */
+form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+label{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+input,select,textarea{font:inherit;font-weight:400;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.check input{width:auto;margin-top:5px;accent-color:var(--peel)}
+.req{color:var(--warn)}
+[hidden]{display:none!important}
+.note{font-size:.9rem;color:var(--muted)}
+.out{border-radius:12px;background:var(--leaf-soft);padding:16px;display:grid;gap:10px}
+.out pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;font:inherit;font-size:.95rem;background:var(--surface);border-radius:8px;padding:12px;border:1px solid var(--line)}
+.err{color:var(--warn);font-weight:600}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0;display:grid;gap:8px;min-width:0}
+legend{font-weight:700;padding:0 6px;font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:6px 18px}
+.opts .check{align-items:center}
+.opts .check input{margin-top:0}
+.callout{border-inline-start:4px solid var(--peel);background:var(--peel-soft);border-radius:10px;padding:12px 14px}
+
+/* guides */
+.steps{counter-reset:s;display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--display);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--peel-soft);color:var(--warn)}
+.stepcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;counter-reset:st}
+.stepcard{counter-increment:st;background:var(--surface);border:2px solid var(--line);border-radius:22px;padding:18px;display:grid;grid-template-columns:56px 1fr;gap:4px 14px;align-content:start;text-decoration:none;color:var(--ink)}
+.stepcard::before{content:counter(st);grid-row:span 2;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--peel-soft);color:var(--warn);font-family:var(--display);font-size:1.8rem}
+.stepcard h3{font-size:1.1rem}
+.stepcard p{margin:0;color:var(--muted);font-size:.95rem}
+.stepcard:hover{border-color:var(--peel)}
+.gear{display:grid;gap:8px;padding:0;margin:0;list-style:none}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start}
+.card ul{margin:0;padding-inline-start:20px}
+.tag{font-size:.8rem;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.callout{border-inline-start:4px solid var(--peel);background:var(--peel-soft);padding:12px 16px;border-radius:0 10px 10px 0}
+:root[dir] .callout{border-radius:10px}
+svg.diagram{width:100%;max-width:520px;height:auto;display:block}
+
+/* season table */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem}
+th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:start;padding-inline-start:12px;white-space:nowrap;font-weight:600}
+thead th{font-weight:700;color:var(--muted);font-size:.8rem}
+td.on{background:var(--peel);opacity:.85}
+td.on.est{background:repeating-linear-gradient(135deg,var(--peel) 0 6px,var(--peel-soft) 6px 10px)}
+tr.now td.now, th.now{outline:2px solid var(--leaf);outline-offset:-2px}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+details+details{margin-top:8px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px;color:var(--ink)}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem;display:grid;gap:6px}
+@media (max-width:480px){.trail{padding-inline-start:26px}.trail::before{inset-inline-start:5px}.stop::before{inset-inline-start:-26px;width:15px;height:15px}.event{grid-template-columns:1fr}.event .links{grid-column:1}.date{text-align:start;display:flex;gap:8px;align-items:baseline}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="hero">
+  <div class="big"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 38 C 112 14, 146 10, 160 22 C 146 40, 118 46, 100 38 Z" fill="#2f5d3a"/><path d="M100 38 C 118 30, 138 24, 156 24" stroke="#8fc79c" stroke-width="3" fill="none"/><circle cx="100" cy="112" r="70" fill="#e8771e"/><path d="M100 112 m-48 0 a48 48 0 1 0 96 0 a36 36 0 1 0 -72 0 a24 24 0 1 0 48 0 a12 12 0 1 0 -24 0" stroke="#fde9d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="100" cy="112" r="70" fill="none" stroke="#9a3b12" stroke-width="4" opacity=".35"/></svg></div>
+  <div class="brand"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 38 C 112 14, 146 10, 160 22 C 146 40, 118 46, 100 38 Z" fill="#2f5d3a"/><path d="M100 38 C 118 30, 138 24, 156 24" stroke="#8fc79c" stroke-width="3" fill="none"/><circle cx="100" cy="112" r="70" fill="#e8771e"/><path d="M100 112 m-48 0 a48 48 0 1 0 96 0 a36 36 0 1 0 -72 0 a24 24 0 1 0 48 0 a12 12 0 1 0 -24 0" stroke="#fde9d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="100" cy="112" r="70" fill="none" stroke="#9a3b12" stroke-width="4" opacity=".35"/></svg><div class="eyebrow">פרויקט שכונתי · קריית השרון, נתניה</div></div>
+  <h1>שביל קליפות <span>התפוזים</span></h1>
+  <p class="lead">בסופי שבוע, לרוב בשישי בצהריים, משפחות מהשכונה עוברות בין שלושה בניינים וקוטפות הדרים מהעצים בגינות המשותפות, באישור ועד הבית. חלק מהפרי נשאר לדיירים, וחלק חוזר איתכם הביתה.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="#join">איך מצטרפים</a>
+    <a class="btn ghost" href="#committees">ועד בית? רישום הבניין</a>
+  </div>
+  <div class="hero-row"><div class="datepill" id="nextPill"><small>הסבב הקרוב</small><b id="nextDate"></b></div><div class="facts">עד 6 משפחות בסבב. בחינם. בשיתוף מרכז קהילתי קריית השרון.</div></div>
+  </div>
+  <nav class="toc" aria-label="תוכן העמוד">
+    <a href="#join">שלושה צעדים</a><a href="#events">סבבים</a><a href="#register">1. הרשמה</a><a href="#share">2. פנייה לוועד</a><a href="#gear">3. ציוד</a><a href="#updates">עדכונים</a><a href="#how">איך קוטפים</a><a href="#build">בונים כלי קטיף</a><a href="#seasons">עונות</a><a href="#kids">לילדים</a><a href="#committees">לוועדי בתים</a><a href="#faq">שאלות</a>
+  </nav>
+</header>
+
+<main class="trail">
+
+<section class="stop" id="join">
+  <h2>מצטרפים בשלושה צעדים</h2>
+  <p class="sub">השביל עובר בגינות של הבניינים שבהם גרים המשתתפים. לכן כל משפחה שנרשמת מזמינה גם את ועד הבית שלה להוסיף את הבניין לשביל.</p>
+  <div class="stepcards">
+    <a class="stepcard" href="#register"><h3>נרשמים</h3><p>בוחרים סבב, כותבים כמה הורים וכמה ילדים יגיעו ומה הכתובת של הבניין שלכם.</p></a>
+    <a class="stepcard" href="#share"><h3>פונים לוועד הבית</h3><p>שולחים לוועד, או לקבוצת הבניין, הזמנה מוכנה לרשום את הבניין לקטיף.</p></a>
+    <a class="stepcard" href="#gear"><h3>מכינים ציוד ומגיעים</h3><p>שקיות, כפפות, מזמרה או כלי חיתוך ומקטף, לפי הרשימה. נקודת המפגש נשלחת ביום חמישי.</p></a>
+  </div>
+</section>
+
+<section class="stop" id="events">
+  <h2>הסבבים הקרובים</h2>
+  <p class="sub">כל סבב נמשך כשעתיים וחצי, ויש בו עד 6 משפחות. החל מ־27 בנובמבר, בערך פעם בשבועיים. מועד שמסומן "לאישור" עוד עשוי לזוז. אם יורד גשם, הסבב מתבטל והנרשמים עוברים ראשונים לסבב הבא. נודיע על כך עד 20:00 ביום חמישי.</p>
+  <div class="events" id="eventList"></div>
+</section>
+
+<section class="stop" id="register">
+  <h2>צעד 1: נרשמים לסבב</h2>
+  <p class="sub">ממלאים את הטופס, ובסיום נפתחת הודעת וואטסאפ מוכנה למספר של היוזמה. ההרשמה נקלטת כשההודעה נשלחת, ונחזור אליכם עם אישור ונקודת המפגש.</p>
+  <form id="regForm" novalidate>
+    <div class="grid2">
+      <label for="fName"><span>שם ההורה <span class="req">*</span></span><input id="fName" autocomplete="name" required></label>
+      <label for="fRound"><span>סבב <span class="req">*</span></span><select id="fRound" required></select></label>
+      <label for="fAdults"><span>כמה הורים או מבוגרים יגיעו <span class="req">*</span></span><input id="fAdults" type="number" min="1" max="6" value="1" inputmode="numeric"></label>
+      <label for="fKids"><span>כמה ילדים יגיעו <span class="req">*</span></span><input id="fKids" type="number" min="0" max="8" value="2" inputmode="numeric"></label>
+      <label for="fAges">גילאי הילדים<input id="fAges" placeholder="לדוגמה: 5, 8"></label>
+      <label for="fStreet"><span>הבניין שלכם: רחוב ומספר <span class="req">*</span></span><input id="fStreet" placeholder="לדוגמה: טום לנטוס 12" autocomplete="address-line1"></label>
+      <label for="fTree">יש עץ פרי בגינה המשותפת?<select id="fTree"><option>כן</option><option>לא</option><option>לא בטוח/ה</option></select></label>
+    </div>
+    <label for="fNotes">אלרגיות, נגישות (עגלה, כיסא גלגלים) או משהו שכדאי שנדע<textarea id="fNotes" rows="2"></textarea></label>
+    <div class="grid2" style="gap:8px">
+      <label class="check" for="cResp"><input type="checkbox" id="cResp"><span>הילדים באחריותי ובהשגחתי לכל אורך הפעילות, וקראתי את כללי הבטיחות. <span class="req">*</span></span></label>
+      <label class="check" for="cVol"><input type="checkbox" id="cVol"><span>אשמח להיות הורה תורן בסבב (עוזר בסוף הקבוצה או עם הארגזים).</span></label>
+      <label class="check" for="cPhoto"><input type="checkbox" id="cPhoto"><span>מותר לפרסם תמונות שלנו מהפעילות בעמוד היוזמה.</span></label>
+      <label class="check" for="cUpd"><input type="checkbox" id="cUpd"><span>אפשר לעדכן אותי על סבבים בעונות הבאות.</span></label>
+    </div>
+    <p class="note">הפרטים נאספים רק כדי לתאם את הסבב, לא מועברים לאף אחד, ונמחקים לפי בקשה או 60 יום אחרי סוף העונה. האתר עצמו לא שומר את מה שהוקלד: הפרטים מגיעים אלינו רק בהודעה שאתם שולחים.</p>
+    <p class="err" id="formErr" hidden></p>
+    <div><button class="btn primary" type="submit">הכנת הודעת ההרשמה</button></div>
+    <div class="out" id="out" hidden>
+      <strong>ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <pre id="msg"></pre>
+      <div class="cta-row">
+        <a class="btn primary" id="waLink" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+        <button class="btn ghost" type="button" id="copyBtn">העתקת ההודעה</button>
+      </div>
+      <p class="note" id="waNote"></p>
+      <div class="callout"><b>הצעד הבא: פונים לוועד הבית.</b> הכנו לכם הזמנה מוכנה לרשום את הבניין לקטיף. <a href="#share">לצעד 2</a></div>
+    </div>
+  </form>
+</section>
+
+<section class="stop" id="share">
+  <h2>צעד 2: מזמינים את ועד הבית</h2>
+  <p class="sub">קוטפים רק בבניינים שהוועד שלהם נרשם. שלחו את ההזמנה לנציג הוועד, או לקבוצת הוואטסאפ של הבניין אם אתם לא יודעים מי בוועד. הוועד ממלא טופס קצר באתר, ומסמן שם גם אם יש לו סולם שיוכל לספק ביום הקטיף.</p>
+  <form id="shareForm" novalidate>
+    <div class="grid2">
+      <label for="sBld">הרחוב ומספר הבניין<input id="sBld" placeholder="לדוגמה: טום לנטוס 12"></label>
+      <label for="sName">השם שלכם, לחתימה בהודעה<input id="sName" autocomplete="given-name"></label>
+    </div>
+    <label class="check" for="sTree"><input type="checkbox" id="sTree" checked><span>יש עץ פרי בגינה המשותפת שלנו</span></label>
+    <label class="check" for="sNb"><input type="checkbox" id="sNb" checked><span>להוסיף להודעה הזמנה גם לשכנים עם ילדים (כשהיא נשלחת לקבוצת הבניין)</span></label>
+    <div class="out">
+      <strong>ההזמנה לוועד</strong>
+      <pre id="sMsg"></pre>
+      <div class="cta-row">
+        <a class="btn primary" id="sWa" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+        <button class="btn ghost" type="button" id="sCopy">העתקת ההודעה</button>
+      </div>
+      <p class="note">הכפתור פותח את וואטסאפ ומבקש לבחור למי לשלוח: לנציג הוועד או לקבוצת הבניין. ההודעה לא עוברת דרכנו.</p>
+    </div>
+  </form>
+</section>
+
+<section class="stop" id="gear">
+  <h2>צעד 3: מכינים ציוד ומגיעים</h2>
+  <p class="sub">כל משפחה מגיעה עם הציוד שלה. אפשר לסמן כאן תוך כדי אריזה.</p>
+  <div class="cards">
+    <div class="card"><h3>לקטיף</h3><ul class="gear">
+      <li><label class="check"><input type="checkbox"><span>שקית בד או סל לכל ילד, ועוד שקית אחת לפרי</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>שקית נפרדת לפרי רקוב או פגוע</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>כפפות גינון לכל מבוגר, וכפפות לילדים אם יש</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>מזמרה או כלי חיתוך אחר לכל מבוגר. גוזרים את הפרי עם עוקץ קצר, וילדים לא חותכים.</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>מקטף מבקבוק על מקל לפרי גבוה (<a href="#build">איך בונים</a>)</span></label></li>
+    </ul></div>
+    <div class="card"><h3>לגוף</h3><ul class="gear">
+      <li><label class="check"><input type="checkbox"><span>נעליים סגורות</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>שרוולים ארוכים: לעצי לימון יש קוצים</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>כובע ובקבוק מים לכל אחד</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>מגבונים, וחטיף לילדים</span></label></li>
+    </ul></div>
+    <div class="card"><h3>מגיעים</h3><ul>
+      <li>נקודת המפגש והשעה המדויקת נשלחות לנרשמים ביום חמישי.</li>
+      <li>מגיעים 10 דקות לפני ההתחלה.</li>
+      <li>לא מביאים סולם. אם צריך, הוועד מספק, ועולים עליו רק מבוגרים.</li>
+      <li>יורד גשם? הסבב מתבטל ואתם עוברים ראשונים לסבב הבא. נודיע עד 20:00 בערב שלפני.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="stop" id="updates">
+  <h2>עדכונים על סבבים חדשים</h2>
+  <p class="sub" id="updText"></p>
+  <div class="cta-row" id="updRow"></div>
+</section>
+
+<section class="stop" id="how">
+  <h2>איך קוטפים הדרים נכון</h2>
+  <p class="sub">כמה כללים פשוטים שומרים על העץ, על הפרי ועל הילדים.</p>
+  <ol class="steps">
+    <li><span><b>קודם טועמים פרי אחד.</b> צבע כתום לא תמיד אומר שהפרי מתוק, והדרים לא ממשיכים להבשיל אחרי הקטיף. אם הפרי חמוץ מדי, משאירים את העץ לשבועיים נוספים.</span></li>
+    <li><span><b>תופסים את הפרי בכף היד, מסובבים ומושכים בעדינות.</b> אם הוא לא משתחרר בקלות, הוא עוד לא מוכן, או שעדיף לגזום אותו.</span></li>
+    <li><span><b>קלמנטינות ומנדרינות גוזמים עם עוקץ קצר.</b> הקליפה שלהן דקה ונקרעת במשיכה. את הגיזום עושה מבוגר במזמרה.</span></li>
+    <li><span><b>לא מטפסים ולא מושכים ענפים.</b> מה שלא מגיעים אליו מהקרקע או עם מוט קטיף, נשאר על העץ.</span></li>
+    <li><span><b>לימון קוצני.</b> מבוגרים בכפפות, ילדים קוטפים מהענפים הנמוכים והפתוחים בלבד.</span></li>
+    <li><span><b>פרי רקוב או מנוקר אוספים בנפרד.</b> המבוגר אוסף אותו בכפפה לשקית נפרדת, כי פרי כזה מושך צרעות וזבובי פירות.</span></li>
+    <li><span><b>שוטפים בבית לפני שאוכלים.</b> לא תמיד ידוע מתי העץ רוסס, ולכן לא אוכלים פרי במקום, אלא אם הוועד אישר שהעץ לא רוסס.</span></li>
+  </ol>
+  <div class="callout"><b>מה מביאים:</b> שקיות, כפפות, מזמרה או כלי חיתוך, מקטף, כובע, מים ונעליים סגורות. <a href="#gear">הרשימה המלאה</a></div>
+</section>
+
+<section class="stop" id="build">
+  <h2>בונים כלי קטיף בבית</h2>
+  <p class="sub">שלושה כלים שאפשר להכין עם הילדים מחומרים שיש בבית. את החיתוך עושה מבוגר בלבד.</p>
+
+  <div class="card">
+    <span class="tag">כלי 1 · כחצי שעה · למבוגר עם ילד</span>
+    <h3>מוט קטיף מבקבוק</h3>
+    <p>כלי שמגיע לפרי שגבוה מהיד: הפרי נכנס לבקבוק, העוקץ נתפס בחריץ, ומשיכה קלה מטה משחררת אותו.</p>
+    <svg class="diagram" viewBox="0 0 520 200" role="img" aria-label="שרטוט: בקבוק פלסטיק מחובר לקצה מקל, עם פתח בצד וחריץ בצורת V בשפת הפתח">
+      <rect x="20" y="92" width="300" height="16" rx="6" fill="var(--muted)" opacity=".55"/>
+      <text x="170" y="134" text-anchor="middle" font-size="14" fill="var(--muted)">מקל מטאטא או מוט צבע טלסקופי</text>
+      <rect x="320" y="62" width="170" height="76" rx="30" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3"/>
+      <rect x="306" y="86" width="20" height="28" rx="4" fill="var(--leaf)"/>
+      <path d="M372 62 L372 38 Q405 22 438 38 L438 62" fill="none" stroke="var(--peel)" stroke-width="3" stroke-dasharray="6 5"/>
+      <path d="M396 38 L405 54 L414 38" fill="none" stroke="var(--warn)" stroke-width="3"/>
+      <circle cx="405" cy="100" r="22" fill="var(--peel)"/>
+      <text x="405" y="18" text-anchor="middle" font-size="14" fill="var(--warn)">חריץ V שתופס את העוקץ</text>
+      <text x="460" y="168" text-anchor="middle" font-size="14" fill="var(--leaf)">פתח בגודל הפרי</text>
+      <text x="300" y="168" text-anchor="middle" font-size="14" fill="var(--leaf)">הפקק מוברג למקל</text>
+    </svg>
+    <p><b>חומרים:</b> בקבוק פלסטיק של 1.5 או 2 ליטר, מקל מטאטא או מוט צבע טלסקופי, בורג קצר או שני אזיקונים, סרט בידוד, סכין יפנית (למבוגר).</p>
+    <ol class="steps">
+      <li><span>מבוגר חותך בצד הבקבוק, קרוב לחלק הרחב, פתח מלבני של כ-9 על 9 ס"מ. זה מספיק לתפוז בינוני.</span></li>
+      <li><span>בשפה העליונה של הפתח חותכים חריץ צר בצורת V, בעומק של כ-3 ס"מ. החריץ תופס את העוקץ.</span></li>
+      <li><span>מכסים את שולי החיתוך בסרט בידוד, כדי שלא יהיו חדים.</span></li>
+      <li><span>מבריגים את הפקק לקצה המקל עם בורג קצר, ואז מבריגים את הבקבוק חזרה לפקק. אפשר במקום זה לקשור באזיקונים ולעטוף בסרט.</span></li>
+      <li><span>שימוש: מכניסים את הפרי לפתח, מכוונים את העוקץ לחריץ, ומושכים בעדינות מטה. מרוקנים את הבקבוק אחרי שניים או שלושה פירות.</span></li>
+    </ol>
+  </div>
+
+  <div class="cards" style="margin-top:14px">
+    <div class="card">
+      <span class="tag">כלי 2 · כרבע שעה · בלי תפירה</span>
+      <h3>שקית קטיף מחולצה ישנה</h3>
+      <ul>
+        <li>גוזרים את השרוולים ופותחים את הצוואר קצת יותר.</li>
+        <li>בתחתית גוזרים פרנזים באורך 8 ס"מ, ברוחב 2 ס"מ כל אחד.</li>
+        <li>קושרים כל פרנזה קדמית לאחורית שמולה, בקשר כפול.</li>
+        <li>הכתפיים הופכות לידיות. הילדים מקשטים בטושים לבד.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">כלי 3 · לילדים צעירים</span>
+      <h3>סל איסוף מקרטון חלב</h3>
+      <ul>
+        <li>מבוגר חותך קרטון חלב שטוף בגובה של 10 ס"מ מהתחתית.</li>
+        <li>מהחלק העליון גוזרים רצועה לידית ומחברים במהדק.</li>
+        <li>זה בדיוק בגודל של שתיים או שלוש קלמנטינות, ומתאים לגילאי 4 עד 6.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">אנחנו לא מביאים סולמות. אם ועד הבית מספק סולם: עולים עליו רק מבוגרים, מבוגר נוסף מחזיק אותו למטה, לא עומדים על שתי המדרגות העליונות, וילדים מקבלים את הפרי מלמטה. מה שלא מגיעים אליו בבטחה, נשאר על העץ.</p>
+</section>
+
+<section class="stop" id="seasons">
+  <h2>מה מבשיל מתי</h2>
+  <p class="sub">השבילים של העונה הזו הם הדרים. בעונות הבאות נוסיף פירות אחרים מהגינות של השכונה. המועדים משתנים מעץ לעץ, ולכן בודקים כל עץ לפני כל סבב.</p>
+  <div class="tablebox"><table id="seasonTable"></table></div>
+  <p class="note">מלא = לפי מדריכי קטיף ומגדלים. מפוספס = הערכה כללית שעוד לא נבדקה. המסגרת הירוקה מסמנת את החודש הנוכחי.</p>
+</section>
+
+<section class="stop" id="kids">
+  <h2>פינת הילדים: כרטיס המסלול</h2>
+  <p class="sub">בכל תחנה יש משימה. מי שמשלים את כולן מקבל חותמת אחרונה וכוס מיץ שסחטנו יחד.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">תחנת פתיחה</span><h3>לקט, שכחה ופאה</h3><p>אומרים יחד את שלושת הכללים: מהקרקע ומהיד ולא מטפסים, עוקץ קטן ולא מושכים, חלק לנו וחלק לשכנים.</p></div>
+    <div class="card"><span class="tag">עץ לימון</span><h3>העץ ששומר על עצמו</h3><p>מוצאים קוץ בלי לגעת בו. מגרדים קליפה בציפורן ומריחים. האם רואים על אותו עץ גם פרח, גם פרי ירוק וגם פרי צהוב?</p></div>
+    <div class="card"><span class="tag">תפוז או קלמנטינה</span><h3>כמה פלחים יש בפנים?</h3><p>מנחשים, קולפים וסופרים. ברוב הפירות יש בין 8 ל-15 פלחים. גדולים סופרים גם את הזרעים.</p></div>
+    <div class="card"><span class="tag">הפרי שנפל</span><h3>מי אוכל את מה שלא קטפנו?</h3><p>מחפשים בלי לגעת: נמלים, זבובים, צרעות, ציפורים. מציירים בכרטיס את מה שמצאתם.</p></div>
+    <div class="card"><span class="tag">תחנת הרכבה, בגינה של הבניין</span><h3>עץ אחד, שני עצים</h3><p>מחפשים בגזע של העץ בגינה את "התפר": המקום שבו שני עצים חוברו לאחד. בגינות שהוועד שלהן אישר, מרכיבים ענף על העץ: המבוגר חותך, והילדים מלפפים את הסרט ותולים תווית עם השם והתאריך. בסבב הבא בודקים יחד אם ההרכבה נקלטה.</p></div>
+    <div class="card"><span class="tag">תחנת סיום</span><h3>מהעץ לכוס</h3><p>מנחשים כמה ק"ג קטפנו ובודקים במשקל. סוחטים מיץ, ומחלקים את הפרי בין הדיירים לקוטפים.</p></div>
+  </div>
+  <details style="margin-top:6px"><summary>למבוגרים שמצטרפים: כמה עובדות לדרך</summary>
+    <p>רוב עצי ההדר בגינות מורכבים על כנה של עץ אחר. לכן זרע מהפרי לא יגדל עץ זהה, ולפעמים צומחים מתחת לנקודת ההרכבה ענפים פראיים שהגנן מסיר.</p>
+    <p>זבוב פירות הים התיכון מטיל ביצים בפרי בשל. פרי שנשאר על העץ או על הקרקע מגדיל את האוכלוסייה ופוגע גם בעצים של השכנים. לכן קטיף וניקוי פרי נשור הם חלק מהטיפול בגינה.</p>
+    <p>מקור ההדרים בדרום-מזרח אסיה. האתרוג הוא מההדרים הראשונים שהגיעו לאזור שלנו. נתניה נוסדה ב-1929 על ידי אגודת בני בנימין. מכירים ותיקים בשכונה שזוכרים מה היה כאן לפני הבניינים? ספרו לנו.</p>
+    <p><b>על ההרכבה.</b> בהרכבה מחברים ענף או ניצן של זן אחד (הרוכב) לגזע ולשורשים של עץ אחר (הכנה), והם מתאחים לעץ אחד. הכנה נותנת שורשים חזקים ועמידות לקרקע ולמחלות, והרוכב נותן את הפרי. החושחש (תפוז חמוץ) שימש במשך שנים ככנה מרכזית להדרים בעולם, והיום משתמשים בו פחות בגלל רגישות לנגיף הטריסטזה. ענף שצומח מתחת לנקודת ההרכבה שייך לכנה, והפרי שלו יהיה שונה.</p>
+    <p><b>איפה מרכיבים.</b> רק על עצים בגינות שהוועד שלהן אישר הרכבה בטופס, ורק על ענף אחד או שניים, כדי שהעץ ימשיך לתת פרי כרגיל. את החיתוך עושה מבוגר בסכין הרכבה, והילדים לא חותכים. בחורף ההרכבה נקלטת פחות טוב מאשר באביב, כשהקליפה נפרדת בקלות מהעץ, ולכן בחורף מתמקדים במציאת נקודות ההרכבה הקיימות ובהדגמה. עצי הרחוב שייכים לעירייה, ולא נוגעים בהם בלי אישור של מחלקת הגינון.</p>
+    <p>מצוות לקט, שכחה ופאה מופיעות בוויקרא י"ט, ט'-י' ובדברים כ"ד, י"ט-כ"א.</p>
+  </details>
+</section>
+
+<section class="stop" id="committees">
+  <h2>לוועדי בתים</h2>
+  <p class="sub">יש לכם עץ הדר בגינה המשותפת? אנחנו קוטפים רק בבניינים שהוועד שלהם אישר, ובמועד שהוועד בוחר.</p>
+  <div class="cards">
+    <div class="card"><h3>מה הבניין מקבל</h3><ul><li>עץ נקי מפרי רקוב, ופחות זבובים וצרעות.</li><li>גינה מסודרת יותר מכפי שמצאנו אותה.</li><li>שקיות פרי לדיירים בלובי.</li></ul></div>
+    <div class="card"><h3>מה אנחנו מתחייבים</h3><ul><li>עד 6 משפחות, עם מדריך, כ-20 דקות בגינה.</li><li>בלי כניסה לבניין. סולם רק אם הוועד מספק אותו, ועליו עולים רק מבוגרים.</li><li>עלון לדיירים שבוע מראש. התנגדות של דייר מבטלת את הקטיף בבניין.</li><li>הרכבה על העץ רק אם הוועד סימן שהוא מאשר, ועל ענף אחד או שניים בלבד.</li></ul></div>
+  </div>
+  <h3 style="margin-top:8px">רישום הבניין לקטיף</h3>
+  <p class="sub">טופס לנציגי ועד הבית. בסיום נפתחת הודעה מוכנה אלינו, ונחזור אליכם לתאם מועד ומסלול.</p>
+  <form id="comForm" novalidate>
+    <div class="grid2">
+      <label for="cName"><span>שם נציג/ת הוועד <span class="req">*</span></span><input id="cName" autocomplete="name"></label>
+      <label for="cRole">תפקיד<select id="cRole"><option>יו"ר הוועד</option><option>חבר/ת ועד</option><option>גזבר/ית</option><option>נציג/ה מטעם הוועד</option><option>חברת ניהול</option></select></label>
+      <label for="cPhone"><span>טלפון לתיאום <span class="req">*</span></span><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel"></label>
+      <label for="cAddr"><span>רחוב ומספר בית <span class="req">*</span></span><input id="cAddr" placeholder="לדוגמה: טום לנטוס 12"></label>
+      <label for="cTrees">כמה עצי פרי בגינה<input id="cTrees" type="number" min="1" max="30" inputmode="numeric"></label>
+      <label for="cWhere">איפה העצים<select id="cWhere"><option value="">לא נבחר</option><option>בחזית הבניין</option><option>בחצר האחורית</option><option>בצד הבניין</option><option>בכמה מקומות</option></select></label>
+    </div>
+    <fieldset><legend>אילו עצים יש</legend><div class="opts" id="cTypes"></div></fieldset>
+    <fieldset><legend>סבבים שהוועד מאשר</legend><div class="opts" id="cRounds"></div></fieldset>
+    <fieldset>
+      <legend>סולם ליום הקטיף <span class="req">*</span></legend>
+      <div class="opts">
+        <label class="check" for="lYes"><input type="radio" name="ladder" id="lYes" value="yes"><span>יש לוועד סולם ונוכל לספק אותו ביום הקטיף</span></label>
+        <label class="check" for="lNo"><input type="radio" name="ladder" id="lNo" value="no"><span>אין לנו סולם</span></label>
+      </div>
+      <div class="grid2" id="ladderMore" hidden>
+        <label for="lType">סוג הסולם<select id="lType"><option>סולם עומד (משולש)</option><option>סולם נשען</option><option>שרפרף מדרגות</option><option>לא בטוח/ה</option></select></label>
+        <label for="lSteps">מספר מדרגות או גובה<input id="lSteps" placeholder="לדוגמה: 6 מדרגות, או 1.8 מטר"></label>
+      </div>
+      <p class="note">את הסולם מפעילים רק מבוגרים, ונבדוק אותו לפני שמתחילים. סולם רעוע לא נשתמש בו.</p>
+    </fieldset>
+    <div class="grid2">
+      <label for="cMax">כמה משפחות הגינה יכולה לקבל<select id="cMax"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+      <label for="cSpray">ריסוס בחודש האחרון<select id="cSpray"><option>לא</option><option>כן</option><option>לא יודע/ת</option></select></label>
+      <label for="cTap">ברז מים בגינה<select id="cTap"><option>יש</option><option>אין</option></select></label>
+      <label for="cSplit">חלוקת הפרי<select id="cSplit"><option>חצי לדיירים, חצי לקוטפים</option><option>הכל לדיירים</option><option>הכל לקוטפים</option><option>נחליט יחד</option></select></label>
+    </div>
+    <label for="cNotes">הערות (גישה לגינה, שעות שקטות, דייר שביקש שלא ייכנסו ליד הדירה)<textarea id="cNotes" rows="2"></textarea></label>
+    <div style="display:grid;gap:8px">
+      <label class="check" for="cGraft"><input type="checkbox" id="cGraft"><span>הוועד מאשר הדגמת הרכבה על ענף אחד או שניים של העץ בגינה.</span></label>
+      <label class="check" for="cShab"><input type="checkbox" id="cShab"><span>הוועד מאשר גם סבבים בשבת.</span></label>
+      <label class="check" for="cOk"><input type="checkbox" id="cOk"><span>הוועד מאשר את השתתפות הבניין, ונתלה לדיירים הודעה לפחות שבוע לפני הקטיף. <span class="req">*</span></span></label>
+      <label class="check" for="cCUpd"><input type="checkbox" id="cCUpd"><span>אפשר לפנות אליי גם בעונות הבאות (זיתים, שסק ועוד).</span></label>
+    </div>
+    <p class="note">הטלפון משמש רק לתיאום הקטיף בבניין, לא מועבר לאף אחד ונמחק לפי בקשה.</p>
+    <p class="err" id="cErr" hidden></p>
+    <div><button class="btn primary" type="submit">הכנת הודעת האישור</button></div>
+    <div class="out" id="cOut" hidden>
+      <strong>ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
+      <pre id="cMsg"></pre>
+      <div class="cta-row">
+        <a class="btn primary" id="cWa" href="#" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+        <button class="btn ghost" type="button" id="cCopy">העתקת ההודעה</button>
+      </div>
+      <p class="note" id="cWaNote"></p>
+    </div>
+  </form>
+</section>
+
+<section class="stop" id="faq">
+  <h2>שאלות נפוצות</h2>
+  <div>
+    <details><summary>באילו ימים?</summary><p>בסופי שבוע, לרוב בשישי בצהריים. חלק גדול מהשכונה שומר שבת, ולכן סבב בשבת יתקיים רק בבניינים שהוועד שלהם אישר זאת במפורש, והמועד יופיע ברשימת הסבבים.</p></details>
+    <details><summary>בבניין שלנו אין עץ, או שהוועד לא אישר. אפשר להשתתף?</summary><p>כן. ההרשמה פתוחה לכל משפחה בשכונה, גם אם הבניין שלה לא תחנה בשביל. עדיין נשמח שתשלחו לוועד את ההזמנה, כי אולי יש עץ שלא שמתם לב אליו.</p></details>
+    <details><summary>מה קורה אם יורד גשם?</summary><p>הסבב מתבטל, ומי שנרשם עובר ראשון לסבב הבא. נודיע עד 20:00 בערב שלפני. גם אם הדשא בוצי מגשם בלילה שלפני, נדחה, כדי לא להרוס לשכנים את הגינה.</p></details>
+    <details><summary>זה עולה כסף?</summary><p>לא. הפעילות בחינם ומתקיימת בשיתוף מרכז קהילתי קריית השרון.</p></details>
+    <details><summary>מאיזה גיל?</summary><p>מגיל 4. ילדים קטנים יותר יכולים להצטרף במנשא או בעגלה, אבל המסלול כולל דשא ומדרכות.</p></details>
+    <details><summary>אפשר לבוא בלי הרשמה?</summary><p>לא. בכל גינה יש מקום לקבוצה קטנה, והוועד מאשר מספר משתתפים מסוים. אם הסבב מלא, נכניס אתכם לרשימת ההמתנה לסבב הבא.</p></details>
+    <details><summary>מה עושים עם הפרי?</summary><p>חצי לדיירי הבניין וחצי למשפחות הקוטפות. בכל בניין הוועד יכול לבחור חלוקה אחרת.</p></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>פרויקט שביל קליפות התפוזים השכונתי · קריית השרון, נתניה, בשיתוף מרכז קהילתי קריית השרון.</p>
+  <p>פרטיות: האתר לא שומר מידע. פרטי ההרשמה מגיעים אלינו רק בהודעה שאתם שולחים, ומשמשים לתיאום הסבב בלבד. למחיקה, שלחו "מחיקה" לאותו מספר.</p>
+</footer>
+</div>
+
+<script>
+/* ===== הגדרות: לעדכן כאן ===== */
+const CONFIG = {
+  waNumber: "",        // מספר הוואטסאפ של היוזמה בפורמט בינלאומי, בלי + ובלי מקפים. לדוגמה: 972501234567
+  channelUrl: "",      // קישור הזמנה לקהילת/קבוצת העדכונים בוואטסאפ (https://chat.whatsapp.com/...)
+  formUrl: "",         // אופציונלי: קישור לטופס Google במקום וואטסאפ
+  siteUrl: "https://omerpines.github.io/orange-peel-trail/"  // הקישור לאתר שמופיע בהודעה לקבוצת הבניין
+};
+const EVENTS = [ // status: open / tbc (מועד לאישור) / full. rain ריק = בגשם עוברים לסבב הבא
+  {id:"R1", date:"2026-11-27", time:"12:00 או 13:00", title:"סבב פתיחה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"open"},
+  {id:"R2", date:"2026-12-11", time:"12:00 או 13:00", title:"סבב חנוכה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R3", date:"2026-12-25", time:"12:00 או 13:00", title:"סבב סוף דצמבר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R4", date:"2027-01-08", time:"12:00 או 13:00", title:"סבב ינואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R5", date:"2027-01-22", time:"12:00 או 13:00", title:"סבב ערב ט\"ו בשבט", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc", note:"תחנה מיוחדת על שבעת המינים"},
+  {id:"R6", date:"2027-02-05", time:"12:00 או 13:00", title:"סבב פברואר", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"},
+  {id:"R7", date:"2027-02-19", time:"12:00 או 13:00", title:"סבב סוף העונה", place:"נקודת המפגש תישלח לנרשמים", seats:6, status:"tbc"}
+];
+const SEASONS = [ // months 1..12, est = not verified
+  {name:"זית (מסיק)", m:[9,10,11,12,1], est:false},
+  {name:"הדרים", m:[12,1,2], est:false},
+  {name:"לימון", m:[1,2,3,4,5,6,7,8,9,10,11,12], est:true},
+  {name:"אבוקדו", m:[10,11,12,1,2,3], est:true},
+  {name:"אפרסמון", m:[10,11,12], est:true},
+  {name:"שסק", m:[3,4,5], est:true},
+  {name:"תות עץ", m:[4,5,6], est:true},
+  {name:"תאנה", m:[8,9,10], est:false},
+  {name:"רימון", m:[9,10,11], est:false}
+];
+/* ============================== */
+
+const HE_MONTHS=["ינו׳","פבר׳","מרץ","אפר׳","מאי","יוני","יולי","אוג׳","ספט׳","אוק׳","נוב׳","דצמ׳"];
+const HE_MONTHS_FULL=["בינואר","בפברואר","במרץ","באפריל","במאי","ביוני","ביולי","באוגוסט","בספטמבר","באוקטובר","בנובמבר","בדצמבר"];
+const DAYS=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+const parse=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const fmt=d=>`${DAYS[d.getDay()]}, ${d.getDate()} ${HE_MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+const today=new Date(); today.setHours(0,0,0,0);
+
+function gcal(ev){
+  const d=parse(ev.date), pad=n=>String(n).padStart(2,"0");
+  const ymd=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+  const p=new URLSearchParams({action:"TEMPLATE",text:"שביל קליפות התפוזים: "+ev.title,dates:`${ymd}T120000/${ymd}T150000`,ctz:"Asia/Jerusalem",details:`שעת התחלה: ${ev.time}. ${ev.rain?"בגשם הסבב עובר ל-"+fmt(parse(ev.rain))+".":"בגשם הסבב מתבטל, והנרשמים עוברים ראשונים לסבב הבא."}`,location:"קריית השרון, נתניה"});
+  return "https://calendar.google.com/calendar/render?"+p.toString();
+}
+
+function renderEvents(){
+  const list=document.getElementById("eventList"), sel=document.getElementById("fRound");
+  list.textContent=""; sel.textContent="";
+  const opt0=document.createElement("option"); opt0.value=""; opt0.textContent="בחרו סבב"; sel.append(opt0);
+  EVENTS.forEach(ev=>{
+    const d=parse(ev.date), past=d<today;
+    const el=document.createElement("article"); el.className="event"+(past?" past":"");
+    el.innerHTML=`<div class="date"><b>${d.getDate()}</b><small>${HE_MONTHS[d.getMonth()]} ${d.getFullYear()}</small></div>
+      <div style="display:grid;gap:4px;min-width:0"><h3></h3><div class="meta"><span>יום ${DAYS[d.getDay()]} · ${ev.time}</span><span class="pl"></span></div>
+      <div class="meta"><span class="chip">${past?"התקיים":(ev.status==="full"?"מלא, רשימת המתנה":"ההרשמה פתוחה")}</span>${!past&&ev.status==="tbc"?'<span class="chip peel">מועד לאישור</span>':""}<span class="chip peel">${ev.rain?"בגשם: "+parse(ev.rain).getDate()+" "+HE_MONTHS[parse(ev.rain).getMonth()]:"בגשם: עוברים לסבב הבא"}</span><span>עד ${ev.seats} משפחות</span></div></div>
+      <div class="links"></div>`;
+    el.querySelector("h3").textContent=ev.title+(ev.note?" · "+ev.note:"");
+    el.querySelector(".pl").textContent=ev.place;
+    if(!past){
+      const a=document.createElement("a"); a.href=gcal(ev); a.target="_blank"; a.rel="noopener"; a.textContent="הוספה ליומן Google";
+      const b=document.createElement("a"); b.href="#register"; b.textContent="להרשמה";
+      b.addEventListener("click",()=>{sel.value=ev.id});
+      el.querySelector(".links").append(b,a);
+      const o=document.createElement("option"); o.value=ev.id; o.textContent=`${fmt(d)} · ${ev.title}`; sel.append(o);
+    }
+    list.append(el);
+  });
+}
+
+function renderSeasons(){
+  const t=document.getElementById("seasonTable"), cur=today.getMonth()+1;
+  let h="<thead><tr><th>פרי</th>"+HE_MONTHS.map((m,i)=>`<th class="${i+1===cur?"now":""}">${m}</th>`).join("")+"</tr></thead><tbody>";
+  SEASONS.forEach(s=>{h+=`<tr><td>${s.name}</td>`+HE_MONTHS.map((_,i)=>{const on=s.m.includes(i+1);return `<td class="${on?"on":""}${on&&s.est?" est":""}${i+1===cur?" now":""}" aria-label="${on?"בעונה":""}"></td>`}).join("")+"</tr>"});
+  t.innerHTML=h+"</tbody>";
+}
+
+function waUrl(text){return CONFIG.waNumber?`https://wa.me/${CONFIG.waNumber}?text=${encodeURIComponent(text)}`:""}
+
+function renderUpdates(){
+  const txt=document.getElementById("updText"), row=document.getElementById("updRow");
+  row.textContent="";
+  if(CONFIG.channelUrl){
+    txt.textContent="הודעות על סבבים חדשים, ביטולים בגלל גשם ותזכורות יוצאות בקבוצת העדכונים בוואטסאפ. רק מנהלי היוזמה כותבים בה, ומספרי הטלפון של המשתתפים לא מוצגים לשאר החברים. מצטרפים בלחיצה, ואפשר לצאת מתי שרוצים.";
+    const a=document.createElement("a"); a.className="btn primary"; a.href=CONFIG.channelUrl; a.target="_blank"; a.rel="noopener"; a.textContent="הצטרפות לקבוצת העדכונים"; row.append(a);
+  } else {
+    txt.textContent="קבוצת עדכונים בוואטסאפ תיפתח בקרוב, והקישור יופיע כאן. עד אז, מי שסימן בהרשמה \"אפשר לעדכן אותי\" יקבל הודעה ישירה על כל סבב חדש ועל ביטולים.";
+  }
+}
+
+const form=document.getElementById("regForm");
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=id=>document.getElementById(id).value.trim(), ch=id=>document.getElementById(id).checked;
+  const err=document.getElementById("formErr"); err.hidden=true;
+  const miss=[];
+  if(!v("fName"))miss.push("שם");
+  if(!v("fRound"))miss.push("סבב");
+  if(!(Number(v("fAdults"))>=1))miss.push("מספר מבוגרים");
+  if(v("fKids")==="")miss.push("מספר ילדים");
+  if(!v("fStreet"))miss.push("כתובת הבניין");
+  if(!ch("cResp"))miss.push("אישור האחריות על הילדים");
+  if(miss.length){err.textContent="חסר: "+miss.join(", ")+".";err.hidden=false;return}
+  const ev=EVENTS.find(x=>x.id===v("fRound"));
+  const lines=[
+    "הרשמה לשביל קליפות התפוזים",
+    `סבב: ${fmt(parse(ev.date))} (${ev.id})`,
+    `שם: ${v("fName")}`,
+    `מבוגרים: ${v("fAdults")||1} · ילדים: ${v("fKids")||0}${v("fAges")?" · גילאים: "+v("fAges"):""}`,
+    `בניין: ${v("fStreet")} · עץ פרי בגינה: ${v("fTree")}`,
+    v("fNotes")?`הערות: ${v("fNotes")}`:"",
+    "אחריות הורים: מאשר/ת",
+    `הורה תורן: ${ch("cVol")?"כן":"לא"}`,
+    `פרסום תמונות: ${ch("cPhoto")?"מאשר/ת":"לא"}`,
+    `עדכונים בעונות הבאות: ${ch("cUpd")?"כן":"לא"}`
+  ].filter(Boolean);
+  const text=lines.join("\n");
+  document.getElementById("msg").textContent=text;
+  const wa=document.getElementById("waLink"), note=document.getElementById("waNote");
+  if(CONFIG.formUrl){wa.href=CONFIG.formUrl; wa.textContent="מעבר לטופס ההרשמה"; note.textContent="אפשר להעתיק את הפרטים מכאן לטופס."}
+  else if(CONFIG.waNumber){wa.href=waUrl(text); wa.textContent="שליחה בוואטסאפ"; note.textContent="אם וואטסאפ לא נפתח, העתיקו את ההודעה ושלחו אותה ידנית."}
+  else {wa.hidden=true; note.textContent="מספר הוואטסאפ של היוזמה יפורסם כאן בקרוב. בינתיים אפשר להעתיק את ההודעה."}
+  const sn=document.getElementById("sName"); if(!sn.value.trim())sn.value=v("fName").split(" ")[0];
+  const sb=document.getElementById("sBld"); if(!sb.value.trim())sb.value=v("fStreet");
+  document.getElementById("sTree").checked=v("fTree")!=="לא";
+  renderShare();
+  const out=document.getElementById("out"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+function wireCopy(btnId,preId){
+  const b=document.getElementById(btnId), pre=document.getElementById(preId);
+  b.addEventListener("click",()=>{
+    const done=()=>{b.textContent="הועתק"};
+    const fallback=()=>{const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent="סמנו והעתיקו"};
+    try{navigator.clipboard.writeText(pre.textContent).then(done,fallback)}catch(e){fallback()}
+  });
+}
+function setSend(a,note,text){
+  a.hidden=false;
+  if(CONFIG.waNumber){a.href=waUrl(text); a.textContent="שליחה בוואטסאפ"; note.textContent="אם וואטסאפ לא נפתח, העתיקו את ההודעה ושלחו אותה ידנית."}
+  else {a.hidden=true; note.textContent="מספר הוואטסאפ של היוזמה יפורסם כאן בקרוב. בינתיים אפשר להעתיק את ההודעה."}
+}
+wireCopy("copyBtn","msg"); wireCopy("sCopy","sMsg"); wireCopy("cCopy","cMsg");
+
+/* --- שליחה לקבוצת הבניין --- */
+const nextEvent=()=>EVENTS.find(e=>parse(e.date)>=today);
+function renderShare(){
+  const bld=document.getElementById("sBld").value.trim(), name=document.getElementById("sName").value.trim(), tree=document.getElementById("sTree").checked, nb=document.getElementById("sNb").checked;
+  const ev=nextEvent();
+  const when=ev?`הסבב הקרוב: ${fmt(parse(ev.date))}, בצהריים.`:"הסבבים מתקיימים בסופי שבוע, לרוב בשישי בצהריים.";
+  const lines=[
+    `שלום לוועד הבית${bld?" ב"+bld:""},`,
+    `${name?"כאן "+name+" מהבניין. ":""}נרשמנו ל"שביל קליפות התפוזים": סיור קטיף משפחתי בגינות המשותפות של קריית השרון, בשיתוף המתנ"ס, עם תחנות לימוד לילדים. ${when}`,
+    "",
+    tree?"יש לנו עץ פרי בגינה המשותפת, ואשמח מאוד שהבניין שלנו יירשם כתחנה בשביל.":"אשמח שהבניין שלנו יירשם לשביל, ואם יש בגינה עץ פרי, שיהיה תחנה בקטיף.",
+    "",
+    "מה זה דורש מהוועד: אישור, ותליית הודעה לדיירים שבוע לפני. מגיעות עד 6 משפחות עם מדריך, לכ-20 דקות בגינה, בלי כניסה לבניין. אם יש לוועד סולם, אפשר לסמן שהוא יספק אותו ביום הקטיף.",
+    "",
+    "רישום הבניין בטופס קצר באתר, בחלק \"לוועדי בתים\":",
+    CONFIG.siteUrl,
+    nb?"\nשכנים עם ילדים מוזמנים להירשם לסבב באותו אתר.":"",
+    "",
+    "תודה!"
+  ];
+  const text=lines.join("\n").replace(/\n{3,}/g,"\n\n");
+  document.getElementById("sMsg").textContent=text;
+  document.getElementById("sWa").href="https://wa.me/?text="+encodeURIComponent(text);
+}
+["sBld","sName","sTree","sNb"].forEach(id=>document.getElementById(id).addEventListener("input",renderShare));
+document.getElementById("shareForm").addEventListener("submit",e=>e.preventDefault());
+
+/* --- טופס ועד הבית --- */
+const TREE_TYPES=["לימון","תפוז","קלמנטינה","אשכולית","פומלה","זית","אבוקדו","שסק","אחר"];
+function buildOpts(boxId,name,items){
+  const box=document.getElementById(boxId); box.textContent="";
+  items.forEach((it,i)=>{
+    const l=document.createElement("label"); l.className="check"; l.htmlFor=name+i;
+    const c=document.createElement("input"); c.type="checkbox"; c.id=name+i; c.value=it.value;
+    const s=document.createElement("span"); s.textContent=it.label;
+    l.append(c,s); box.append(l);
+  });
+}
+const checked=boxId=>[...document.querySelectorAll("#"+boxId+" input:checked")].map(c=>c.value);
+function renderComRounds(){
+  const items=EVENTS.filter(e=>parse(e.date)>=today).map(e=>{const d=parse(e.date);return {value:`${d.getDate()}.${d.getMonth()+1} (${e.id})`,label:`${DAYS[d.getDay()]} ${d.getDate()} ${HE_MONTHS[d.getMonth()]}: ${e.title}`}});
+  items.push({value:"מועד אחר בתיאום",label:"מועד אחר, בתיאום"});
+  buildOpts("cRounds","cr",items);
+}
+buildOpts("cTypes","ct",TREE_TYPES.map(t=>({value:t,label:t})));
+document.querySelectorAll('input[name="ladder"]').forEach(r=>r.addEventListener("change",()=>{
+  document.getElementById("ladderMore").hidden=!document.getElementById("lYes").checked;
+}));
+document.getElementById("comForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=id=>document.getElementById(id).value.trim();
+  const err=document.getElementById("cErr"); err.hidden=true;
+  const ladder=document.querySelector('input[name="ladder"]:checked');
+  const miss=[];
+  if(!v("cName"))miss.push("שם");
+  if(!v("cPhone"))miss.push("טלפון");
+  if(!v("cAddr"))miss.push("כתובת הבניין");
+  if(!ladder)miss.push("סימון סולם");
+  if(!document.getElementById("cOk").checked)miss.push("אישור הוועד");
+  if(miss.length){err.textContent="חסר: "+miss.join(", ")+".";err.hidden=false;return}
+  const types=checked("cTypes"), rounds=checked("cRounds");
+  const ladderTxt=ladder.value==="yes"?`יש, הוועד יספק ביום הקטיף (${v("lType")}${v("lSteps")?", "+v("lSteps"):""})`:"אין";
+  const lines=[
+    "אישור ועד בית: שביל קליפות התפוזים",
+    `בניין: ${v("cAddr")}`,
+    `נציג/ה: ${v("cName")}, ${v("cRole")}`,
+    `טלפון: ${v("cPhone")}`,
+    `עצים: ${types.length?types.join(", "):"לא צוין"}${v("cTrees")?" · מספר: "+v("cTrees"):""}${v("cWhere")?" · "+v("cWhere"):""}`,
+    `סבבים מאושרים: ${rounds.length?rounds.join(", "):"לתאם"}`,
+    `סולם: ${ladderTxt}`,
+    `משפחות בגינה: עד ${v("cMax")}`,
+    `ריסוס בחודש האחרון: ${v("cSpray")}`,
+    `ברז מים: ${v("cTap")}`,
+    `חלוקת הפרי: ${v("cSplit")}`,
+    v("cNotes")?`הערות: ${v("cNotes")}`:"",
+    `הדגמת הרכבה על העץ: ${document.getElementById("cGraft").checked?"מאושר":"לא"}`,
+    `סבבים בשבת: ${document.getElementById("cShab").checked?"מאושר":"לא"}`,
+    "הוועד מאשר השתתפות ותליית הודעה לדיירים שבוע מראש",
+    `פנייה בעונות הבאות: ${document.getElementById("cCUpd").checked?"כן":"לא"}`
+  ].filter(Boolean);
+  const text=lines.join("\n");
+  document.getElementById("cMsg").textContent=text;
+  setSend(document.getElementById("cWa"),document.getElementById("cWaNote"),text);
+  const out=document.getElementById("cOut"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+(function(){const ev=nextEvent(),el=document.getElementById("nextDate");if(ev){const d=parse(ev.date);el.textContent=`${DAYS[d.getDay()]} ${d.getDate()}.${d.getMonth()+1}`}else{document.getElementById("nextPill").hidden=true}})();
+renderEvents(); renderSeasons(); renderUpdates(); renderComRounds(); renderShare();
+</script>
+
+</body>
+</html>
