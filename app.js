@@ -109,6 +109,7 @@ if(form) form.addEventListener("submit",async e=>{
   if(v("fKids")==="")miss.push("מספר ילדים");
   if(!v("fStreet"))miss.push("כתובת הבניין");
   if(!ch("cResp"))miss.push("אישור האחריות על הילדים");
+  if(CONFIG.channelUrl&&!ch("cGroup"))miss.push("הסכמה להצטרף לקבוצת הוואטסאפ");
   if(miss.length){err.textContent="חסר: "+miss.join(", ")+".";err.hidden=false;return}
   const ev=EVENTS.find(x=>x.id===v("fRound"));
   const lines=[
@@ -128,13 +129,14 @@ if(form) form.addEventListener("submit",async e=>{
   document.getElementById("msg").textContent=text;
   const wa=document.getElementById("waLink"), note=document.getElementById("waNote");
   const saved=await saveToSheet("family",{"שם ההורה":v("fName"),"טלפון":v("fPhone"),"סבב":ev.id,"תאריך הסבב":fmt(parse(ev.date)),"מבוגרים":v("fAdults")||"1","ילדים":v("fKids")||"0","גילאי הילדים":v("fAges"),"בניין":v("fStreet"),"עץ פרי בגינה":v("fTree"),"הערות":v("fNotes"),"אחריות הורים":"מאשר/ת","הורה תורן":ch("cVol")?"כן":"לא","אישור תמונות":ch("cPhoto")?"כן":"לא","עדכונים בעונות הבאות":ch("cUpd")?"כן":"לא"},v("fWeb"));
-  document.getElementById("outHead").textContent=!saved?"ההודעה מוכנה. שלב אחרון: לשלוח אותה.":(saved.waitlist?"הסבב מלא, ונכנסתם לרשימת ההמתנה. אם יתפנה מקום, נעדכן אתכם.":"נרשמתם! נחזור אליכם עם אישור ונקודת המפגש.");
+  document.getElementById("outHead").textContent=!saved?"ההודעה מוכנה. שלב אחרון: לשלוח אותה.":(saved.waitlist?"הסבב מלא, ונכנסתם לרשימת ההמתנה. הצטרפו לקבוצה: אם יתפנה מקום, נעדכן שם.":"נרשמתם! שלב אחרון: מצטרפים לקבוצת הוואטסאפ. שם נפרסם את נקודת המפגש.");
   if(saved&&!saved.waitlist&&TAKEN){TAKEN[ev.id]=(TAKEN[ev.id]||0)+1; const sl=$("fRound"); sl.dataset.v=ev.id; renderEvents();}
   if(CONFIG.formUrl){wa.href=CONFIG.formUrl; wa.textContent="מעבר לטופס ההרשמה"; note.textContent="אפשר להעתיק את הפרטים מכאן לטופס."}
   else if(CONFIG.waNumber){wa.href=waUrl(text); wa.textContent="שליחה בוואטסאפ"; note.textContent="אם וואטסאפ לא נפתח, העתיקו את ההודעה ושלחו אותה ידנית."}
   else {wa.hidden=true; note.textContent="מספר הוואטסאפ של היוזמה יפורסם כאן בקרוב. בינתיים אפשר להעתיק את ההודעה."}
   if(saved){wa.hidden=true; note.textContent="הפרטים נשמרו אצלנו. אפשר להעתיק אותם לעצמכם לתזכורת."}
-  if(CONFIG.channelUrl&&!$("grpJoin")){const g=document.createElement("p"); g.id="grpJoin"; g.className="note"; g.innerHTML='עדכונים על הסבב, כולל ביטולים בגלל גשם, יוצאים בקבוצת הוואטסאפ. <a target="_blank" rel="noopener">להצטרפות לקבוצה</a>'; g.querySelector("a").href=CONFIG.channelUrl; note.after(g);}
+  if(saved&&CONFIG.channelUrl){wa.hidden=false; wa.href=CONFIG.channelUrl; wa.textContent="הצטרפות לקבוצת הוואטסאפ"; note.textContent="כל העדכונים על הסבב, כולל נקודת המפגש וביטולים בגלל גשם, יוצאים רק בקבוצה. הפרטים שלכם נשמרו אצלנו."}
+  else if(CONFIG.channelUrl&&!$("grpJoin")){const g=document.createElement("p"); g.id="grpJoin"; g.className="note"; g.innerHTML='עדכונים על הסבב, כולל ביטולים בגלל גשם, יוצאים בקבוצת הוואטסאפ. <a target="_blank" rel="noopener">להצטרפות לקבוצה</a>'; g.querySelector("a").href=CONFIG.channelUrl; note.after(g);}
   store.set("shvil_invite",{b:v("fStreet"),n:v("fName").split(" ")[0],t:v("fTree")!=="לא"});
   const out=document.getElementById("out"); out.hidden=false; out.scrollIntoView({behavior:"smooth",block:"nearest"});
 });

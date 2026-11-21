@@ -22,7 +22,7 @@
 <div class="topbar"><a class="homelink" href="index.html"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M100 38 C 112 14, 146 10, 160 22 C 146 40, 118 46, 100 38 Z" fill="#2f5d3a"/><path d="M100 38 C 118 30, 138 24, 156 24" stroke="#8fc79c" stroke-width="3" fill="none"/><circle cx="100" cy="112" r="70" fill="#e8771e"/><path d="M100 112 m-48 0 a48 48 0 1 0 96 0 a36 36 0 1 0 -72 0 a24 24 0 1 0 48 0 a12 12 0 1 0 -24 0" stroke="#fde9d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="100" cy="112" r="70" fill="none" stroke="#9a3b12" stroke-width="4" opacity=".35"/></svg><span>שביל קליפות התפוזים</span></a><nav class="toc" aria-label="ניווט באתר"><a href="index.html">בית</a><a href="rounds.html">סבבים</a><a href="register.html" aria-current="page">הרשמה</a><a href="invite.html">פנייה לוועד</a><a href="gear.html">ציוד וכלים</a><a href="learn.html">לומדים בשביל</a><a href="committees.html">לוועדי בתים</a><a href="faq.html">שאלות</a></nav></div>
 <header class="pagehead"><div class="stepno">צעד 1 מתוך 3</div><h1>נרשמים לסבב</h1><p>ממלאים פרטים קצרים: מי מגיע, לאיזה סבב, ומה הכתובת של הבניין שלכם.</p></header><main class="trail">
 <section class="stop" id="register">
-  <p class="sub">ממלאים את הטופס, ובסיום נפתחת הודעת וואטסאפ מוכנה למספר של היוזמה. ההרשמה נקלטת כשההודעה נשלחת, ונחזור אליכם עם אישור ונקודת המפגש.</p>
+  <p class="sub">ממלאים את הטופס ומצטרפים לקבוצת הוואטסאפ של השביל. כל העדכונים, כולל נקודת המפגש, תזכורות וביטולים בגלל גשם, יוצאים רק בקבוצה.</p>
   <form id="regForm" novalidate>
     <input type="text" id="fWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
     <div class="grid2">
@@ -38,13 +38,14 @@
     <label for="fNotes">אלרגיות, נגישות (עגלה, כיסא גלגלים) או משהו שכדאי שנדע<textarea id="fNotes" rows="2"></textarea></label>
     <div class="grid2" style="gap:8px">
       <label class="check" for="cResp"><input type="checkbox" id="cResp"><span>הילדים באחריותי ובהשגחתי לכל אורך הפעילות, וקראתי את כללי הבטיחות. <span class="req">*</span></span></label>
+      <label class="check" for="cGroup"><input type="checkbox" id="cGroup"><span>אצטרף לקבוצת הוואטסאפ של השביל. נקודת המפגש וכל העדכונים מתפרסמים רק שם. <span class="req">*</span></span></label>
       <label class="check" for="cVol"><input type="checkbox" id="cVol"><span>אשמח להיות הורה תורן בסבב (עוזר בסוף הקבוצה או עם הארגזים).</span></label>
       <label class="check" for="cPhoto"><input type="checkbox" id="cPhoto"><span>מותר לפרסם תמונות שלנו מהפעילות בעמוד היוזמה.</span></label>
       <label class="check" for="cUpd"><input type="checkbox" id="cUpd"><span>אפשר לעדכן אותי על סבבים בעונות הבאות.</span></label>
     </div>
     <p class="note" id="famPrivacy">הפרטים נאספים רק כדי לתאם את הסבב, לא מועברים לאף אחד, ונמחקים לפי בקשה או 60 יום אחרי סוף העונה.</p>
     <p class="err" id="formErr" hidden></p>
-    <div><button class="btn primary" type="submit">הכנת הודעת ההרשמה</button></div>
+    <div><button class="btn primary" type="submit">נרשמים</button></div>
     <div class="out" id="out" hidden>
       <strong id="outHead">ההודעה מוכנה. שלב אחרון: לשלוח אותה.</strong>
       <pre id="msg"></pre>
